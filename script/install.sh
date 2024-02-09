@@ -1,8 +1,12 @@
 fvm flutter pub add  \
-hooks_riverpod \
+file_picker_pro \
 flutter_hooks \
+flutter_svg \
+go_router_plus \
+hooks_riverpod \
+just_audio \
 riverpod_annotation \
-dev:riverpod_generator \
 dev:build_runner \
 dev:custom_lint \
+dev:riverpod_generator \
 dev:riverpod_lint

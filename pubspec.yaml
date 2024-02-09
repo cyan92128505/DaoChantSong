@@ -38,6 +38,10 @@ dependencies:
   hooks_riverpod: ^2.4.10
   flutter_hooks: ^0.20.5
   riverpod_annotation: ^2.3.4
+  file_picker_pro: ^1.5.0
+  flutter_svg: ^2.0.9
+  go_router_plus: ^4.1.1
+  just_audio: ^0.9.36
 
 dev_dependencies:
   flutter_test:
