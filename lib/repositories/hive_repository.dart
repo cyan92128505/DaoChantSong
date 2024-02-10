@@ -6,6 +6,10 @@ abstract class HiveRepository<K, T> {
 
   HiveRepository({this.boxKey = 'appBox'});
 
+  static Future<void> hiveInitial() async {
+    await Hive.initFlutter();
+  }
+
   Future<void> initial() async {
     if (Hive.isBoxOpen(boxKey) != true) {
       await Hive.initFlutter();

@@ -6,7 +6,7 @@ part of 'player.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$playerHash() => r'c81c32201eba28f8869de6d5151421f2a539e0e0';
+String _$playerHash() => r'083538b6b39ab21b5c06381c13dc8acebd15fd27';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -31,9 +31,11 @@ class _SystemHash {
 
 abstract class _$Player extends BuildlessAsyncNotifier<PlayerViewModel> {
   late final SongHiveRepository? repository;
+  late final AudioPlayer? audioPlayer;
 
   FutureOr<PlayerViewModel> build({
     SongHiveRepository? repository,
+    AudioPlayer? audioPlayer,
   });
 }
 
@@ -49,9 +51,11 @@ class PlayerFamily extends Family<AsyncValue<PlayerViewModel>> {
   /// See also [Player].
   PlayerProvider call({
     SongHiveRepository? repository,
+    AudioPlayer? audioPlayer,
   }) {
     return PlayerProvider(
       repository: repository,
+      audioPlayer: audioPlayer,
     );
   }
 
@@ -61,6 +65,7 @@ class PlayerFamily extends Family<AsyncValue<PlayerViewModel>> {
   ) {
     return call(
       repository: provider.repository,
+      audioPlayer: provider.audioPlayer,
     );
   }
 
@@ -85,8 +90,11 @@ class PlayerProvider
   /// See also [Player].
   PlayerProvider({
     SongHiveRepository? repository,
+    AudioPlayer? audioPlayer,
   }) : this._internal(
-          () => Player()..repository = repository,
+          () => Player()
+            ..repository = repository
+            ..audioPlayer = audioPlayer,
           from: playerProvider,
           name: r'playerProvider',
           debugGetCreateSourceHash:
@@ -96,6 +104,7 @@ class PlayerProvider
           dependencies: PlayerFamily._dependencies,
           allTransitiveDependencies: PlayerFamily._allTransitiveDependencies,
           repository: repository,
+          audioPlayer: audioPlayer,
         );
 
   PlayerProvider._internal(
@@ -106,9 +115,11 @@ class PlayerProvider
     required super.debugGetCreateSourceHash,
     required super.from,
     required this.repository,
+    required this.audioPlayer,
   }) : super.internal();
 
   final SongHiveRepository? repository;
+  final AudioPlayer? audioPlayer;
 
   @override
   FutureOr<PlayerViewModel> runNotifierBuild(
@@ -116,6 +127,7 @@ class PlayerProvider
   ) {
     return notifier.build(
       repository: repository,
+      audioPlayer: audioPlayer,
     );
   }
 
@@ -124,13 +136,16 @@ class PlayerProvider
     return ProviderOverride(
       origin: this,
       override: PlayerProvider._internal(
-        () => create()..repository = repository,
+        () => create()
+          ..repository = repository
+          ..audioPlayer = audioPlayer,
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
         repository: repository,
+        audioPlayer: audioPlayer,
       ),
     );
   }
@@ -142,13 +157,16 @@ class PlayerProvider
 
   @override
   bool operator ==(Object other) {
-    return other is PlayerProvider && other.repository == repository;
+    return other is PlayerProvider &&
+        other.repository == repository &&
+        other.audioPlayer == audioPlayer;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, repository.hashCode);
+    hash = _SystemHash.combine(hash, audioPlayer.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -157,6 +175,9 @@ class PlayerProvider
 mixin PlayerRef on AsyncNotifierProviderRef<PlayerViewModel> {
   /// The parameter `repository` of this provider.
   SongHiveRepository? get repository;
+
+  /// The parameter `audioPlayer` of this provider.
+  AudioPlayer? get audioPlayer;
 }
 
 class _PlayerProviderElement
@@ -166,6 +187,8 @@ class _PlayerProviderElement
 
   @override
   SongHiveRepository? get repository => (origin as PlayerProvider).repository;
+  @override
+  AudioPlayer? get audioPlayer => (origin as PlayerProvider).audioPlayer;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

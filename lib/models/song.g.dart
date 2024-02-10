@@ -9,8 +9,8 @@ part of 'song.dart';
 _$SongItemImpl _$$SongItemImplFromJson(Map<String, dynamic> json) =>
     _$SongItemImpl(
       id: json['id'] as String? ?? '',
-      displayName: json['display_name'] as String? ?? '',
-      url: json['url'] as String? ?? '',
+      title: json['title'] as String? ?? '',
+      filePath: json['filePath'] as String? ?? '',
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),
@@ -22,8 +22,8 @@ _$SongItemImpl _$$SongItemImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$SongItemImplToJson(_$SongItemImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'display_name': instance.displayName,
-      'url': instance.url,
+      'title': instance.title,
+      'filePath': instance.filePath,
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
     };

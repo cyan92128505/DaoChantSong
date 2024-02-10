@@ -1,5 +1,4 @@
-import 'package:dao/comonents/add_remove_song_buttons.dart';
-import 'package:dao/comonents/audio_control_buttons.dart';
+import 'package:dao/comonents/add_song_buttons.dart';
 import 'package:dao/comonents/audio_progress_bar.dart';
 import 'package:dao/comonents/current_song_title.dart';
 import 'package:dao/comonents/play_list.dart';
@@ -15,10 +14,9 @@ class PlayerScreen extends Screen {
         child: Column(
           children: [
             CurrentSongTitle(),
-            Playlist(),
             AudioProgressBar(),
-            AudioControlButtons(),
-            AddRemoveSongButtons(),
+            Playlist(),
+            AddSongPanel(),
           ],
         ),
       ),

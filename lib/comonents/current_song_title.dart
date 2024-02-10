@@ -11,7 +11,7 @@ class CurrentSongTitle extends HookConsumerWidget {
       return Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: Text(
-          viewModel.currentSongItem?.displayName ?? '未播放',
+          viewModel.currentSongItem?.title ?? '未播放',
           style: const TextStyle(
             fontSize: 40,
           ),

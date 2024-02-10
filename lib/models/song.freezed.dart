@@ -22,10 +22,10 @@ SongItem _$SongItemFromJson(Map<String, dynamic> json) {
 mixin _$SongItem {
   @JsonKey(name: 'id')
   String get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'display_name')
-  String get displayName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'url')
-  String get url => throw _privateConstructorUsedError;
+  @JsonKey(name: 'title')
+  String get title => throw _privateConstructorUsedError;
+  @JsonKey(name: 'filePath')
+  String get filePath => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
@@ -44,8 +44,8 @@ abstract class $SongItemCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'id') String id,
-      @JsonKey(name: 'display_name') String displayName,
-      @JsonKey(name: 'url') String url,
+      @JsonKey(name: 'title') String title,
+      @JsonKey(name: 'filePath') String filePath,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
@@ -64,8 +64,8 @@ class _$SongItemCopyWithImpl<$Res, $Val extends SongItem>
   @override
   $Res call({
     Object? id = null,
-    Object? displayName = null,
-    Object? url = null,
+    Object? title = null,
+    Object? filePath = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -74,13 +74,13 @@ class _$SongItemCopyWithImpl<$Res, $Val extends SongItem>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      displayName: null == displayName
-          ? _value.displayName
-          : displayName // ignore: cast_nullable_to_non_nullable
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
-      url: null == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
+      filePath: null == filePath
+          ? _value.filePath
+          : filePath // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: freezed == createdAt
           ? _value.createdAt
@@ -104,8 +104,8 @@ abstract class _$$SongItemImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'id') String id,
-      @JsonKey(name: 'display_name') String displayName,
-      @JsonKey(name: 'url') String url,
+      @JsonKey(name: 'title') String title,
+      @JsonKey(name: 'filePath') String filePath,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
@@ -122,8 +122,8 @@ class __$$SongItemImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? displayName = null,
-    Object? url = null,
+    Object? title = null,
+    Object? filePath = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -132,13 +132,13 @@ class __$$SongItemImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      displayName: null == displayName
-          ? _value.displayName
-          : displayName // ignore: cast_nullable_to_non_nullable
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
-      url: null == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
+      filePath: null == filePath
+          ? _value.filePath
+          : filePath // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: freezed == createdAt
           ? _value.createdAt
@@ -157,8 +157,8 @@ class __$$SongItemImplCopyWithImpl<$Res>
 class _$SongItemImpl extends _SongItem {
   const _$SongItemImpl(
       {@JsonKey(name: 'id') this.id = '',
-      @JsonKey(name: 'display_name') this.displayName = '',
-      @JsonKey(name: 'url') this.url = '',
+      @JsonKey(name: 'title') this.title = '',
+      @JsonKey(name: 'filePath') this.filePath = '',
       @JsonKey(name: 'created_at') this.createdAt = null,
       @JsonKey(name: 'updated_at') this.updatedAt = null})
       : super._();
@@ -170,11 +170,11 @@ class _$SongItemImpl extends _SongItem {
   @JsonKey(name: 'id')
   final String id;
   @override
-  @JsonKey(name: 'display_name')
-  final String displayName;
+  @JsonKey(name: 'title')
+  final String title;
   @override
-  @JsonKey(name: 'url')
-  final String url;
+  @JsonKey(name: 'filePath')
+  final String filePath;
   @override
   @JsonKey(name: 'created_at')
   final DateTime? createdAt;
@@ -184,7 +184,7 @@ class _$SongItemImpl extends _SongItem {
 
   @override
   String toString() {
-    return 'SongItem(id: $id, displayName: $displayName, url: $url, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'SongItem(id: $id, title: $title, filePath: $filePath, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -193,9 +193,9 @@ class _$SongItemImpl extends _SongItem {
         (other.runtimeType == runtimeType &&
             other is _$SongItemImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.displayName, displayName) ||
-                other.displayName == displayName) &&
-            (identical(other.url, url) || other.url == url) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.filePath, filePath) ||
+                other.filePath == filePath) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -205,7 +205,7 @@ class _$SongItemImpl extends _SongItem {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, displayName, url, createdAt, updatedAt);
+      Object.hash(runtimeType, id, title, filePath, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -224,8 +224,8 @@ class _$SongItemImpl extends _SongItem {
 abstract class _SongItem extends SongItem {
   const factory _SongItem(
       {@JsonKey(name: 'id') final String id,
-      @JsonKey(name: 'display_name') final String displayName,
-      @JsonKey(name: 'url') final String url,
+      @JsonKey(name: 'title') final String title,
+      @JsonKey(name: 'filePath') final String filePath,
       @JsonKey(name: 'created_at') final DateTime? createdAt,
       @JsonKey(name: 'updated_at') final DateTime? updatedAt}) = _$SongItemImpl;
   const _SongItem._() : super._();
@@ -237,11 +237,11 @@ abstract class _SongItem extends SongItem {
   @JsonKey(name: 'id')
   String get id;
   @override
-  @JsonKey(name: 'display_name')
-  String get displayName;
+  @JsonKey(name: 'title')
+  String get title;
   @override
-  @JsonKey(name: 'url')
-  String get url;
+  @JsonKey(name: 'filePath')
+  String get filePath;
   @override
   @JsonKey(name: 'created_at')
   DateTime? get createdAt;

@@ -1,3 +1,5 @@
+import 'package:dao/repositories/hive_repository.dart';
+import 'package:dao/repositories/song_hive_repository.dart';
 import 'package:dao/screens/player.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router_plus/go_router_plus.dart';
@@ -10,6 +12,10 @@ void main() async {
     androidNotificationChannelName: 'Audio playback',
     androidNotificationOngoing: true,
   );
+
+  await HiveRepository.hiveInitial();
+  await songHiveRepository.initial();
+
   final router = createGoRouter(
     screens: [
       PlayerScreen(),

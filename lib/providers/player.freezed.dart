@@ -180,8 +180,6 @@ abstract class _ProgressBarState extends ProgressBarState {
 mixin _$PlayerViewModel {
   SongItem? get currentSongItem => throw _privateConstructorUsedError;
   List<SongItem> get songs => throw _privateConstructorUsedError;
-  AudioPlayer? get audioPlayer => throw _privateConstructorUsedError;
-  ConcatenatingAudioSource? get playlist => throw _privateConstructorUsedError;
   ProgressBarState get progressBarState => throw _privateConstructorUsedError;
   RepeatState get repeatState => throw _privateConstructorUsedError;
   PlayerState get playerState => throw _privateConstructorUsedError;
@@ -200,8 +198,6 @@ abstract class $PlayerViewModelCopyWith<$Res> {
   $Res call(
       {SongItem? currentSongItem,
       List<SongItem> songs,
-      AudioPlayer? audioPlayer,
-      ConcatenatingAudioSource? playlist,
       ProgressBarState progressBarState,
       RepeatState repeatState,
       PlayerState playerState});
@@ -225,8 +221,6 @@ class _$PlayerViewModelCopyWithImpl<$Res, $Val extends PlayerViewModel>
   $Res call({
     Object? currentSongItem = freezed,
     Object? songs = null,
-    Object? audioPlayer = freezed,
-    Object? playlist = freezed,
     Object? progressBarState = null,
     Object? repeatState = null,
     Object? playerState = null,
@@ -240,14 +234,6 @@ class _$PlayerViewModelCopyWithImpl<$Res, $Val extends PlayerViewModel>
           ? _value.songs
           : songs // ignore: cast_nullable_to_non_nullable
               as List<SongItem>,
-      audioPlayer: freezed == audioPlayer
-          ? _value.audioPlayer
-          : audioPlayer // ignore: cast_nullable_to_non_nullable
-              as AudioPlayer?,
-      playlist: freezed == playlist
-          ? _value.playlist
-          : playlist // ignore: cast_nullable_to_non_nullable
-              as ConcatenatingAudioSource?,
       progressBarState: null == progressBarState
           ? _value.progressBarState
           : progressBarState // ignore: cast_nullable_to_non_nullable
@@ -295,8 +281,6 @@ abstract class _$$PlayerViewModelImplCopyWith<$Res>
   $Res call(
       {SongItem? currentSongItem,
       List<SongItem> songs,
-      AudioPlayer? audioPlayer,
-      ConcatenatingAudioSource? playlist,
       ProgressBarState progressBarState,
       RepeatState repeatState,
       PlayerState playerState});
@@ -320,8 +304,6 @@ class __$$PlayerViewModelImplCopyWithImpl<$Res>
   $Res call({
     Object? currentSongItem = freezed,
     Object? songs = null,
-    Object? audioPlayer = freezed,
-    Object? playlist = freezed,
     Object? progressBarState = null,
     Object? repeatState = null,
     Object? playerState = null,
@@ -335,14 +317,6 @@ class __$$PlayerViewModelImplCopyWithImpl<$Res>
           ? _value._songs
           : songs // ignore: cast_nullable_to_non_nullable
               as List<SongItem>,
-      audioPlayer: freezed == audioPlayer
-          ? _value.audioPlayer
-          : audioPlayer // ignore: cast_nullable_to_non_nullable
-              as AudioPlayer?,
-      playlist: freezed == playlist
-          ? _value.playlist
-          : playlist // ignore: cast_nullable_to_non_nullable
-              as ConcatenatingAudioSource?,
       progressBarState: null == progressBarState
           ? _value.progressBarState
           : progressBarState // ignore: cast_nullable_to_non_nullable
@@ -365,8 +339,6 @@ class _$PlayerViewModelImpl extends _PlayerViewModel {
   const _$PlayerViewModelImpl(
       {this.currentSongItem = null,
       final List<SongItem> songs = const <SongItem>[],
-      this.audioPlayer = null,
-      this.playlist = null,
       this.progressBarState = const ProgressBarState(),
       this.repeatState = RepeatState.off,
       this.playerState = PlayerState.paused})
@@ -387,12 +359,6 @@ class _$PlayerViewModelImpl extends _PlayerViewModel {
 
   @override
   @JsonKey()
-  final AudioPlayer? audioPlayer;
-  @override
-  @JsonKey()
-  final ConcatenatingAudioSource? playlist;
-  @override
-  @JsonKey()
   final ProgressBarState progressBarState;
   @override
   @JsonKey()
@@ -403,7 +369,7 @@ class _$PlayerViewModelImpl extends _PlayerViewModel {
 
   @override
   String toString() {
-    return 'PlayerViewModel(currentSongItem: $currentSongItem, songs: $songs, audioPlayer: $audioPlayer, playlist: $playlist, progressBarState: $progressBarState, repeatState: $repeatState, playerState: $playerState)';
+    return 'PlayerViewModel(currentSongItem: $currentSongItem, songs: $songs, progressBarState: $progressBarState, repeatState: $repeatState, playerState: $playerState)';
   }
 
   @override
@@ -414,10 +380,6 @@ class _$PlayerViewModelImpl extends _PlayerViewModel {
             (identical(other.currentSongItem, currentSongItem) ||
                 other.currentSongItem == currentSongItem) &&
             const DeepCollectionEquality().equals(other._songs, _songs) &&
-            (identical(other.audioPlayer, audioPlayer) ||
-                other.audioPlayer == audioPlayer) &&
-            (identical(other.playlist, playlist) ||
-                other.playlist == playlist) &&
             (identical(other.progressBarState, progressBarState) ||
                 other.progressBarState == progressBarState) &&
             (identical(other.repeatState, repeatState) ||
@@ -431,8 +393,6 @@ class _$PlayerViewModelImpl extends _PlayerViewModel {
       runtimeType,
       currentSongItem,
       const DeepCollectionEquality().hash(_songs),
-      audioPlayer,
-      playlist,
       progressBarState,
       repeatState,
       playerState);
@@ -449,8 +409,6 @@ abstract class _PlayerViewModel extends PlayerViewModel {
   const factory _PlayerViewModel(
       {final SongItem? currentSongItem,
       final List<SongItem> songs,
-      final AudioPlayer? audioPlayer,
-      final ConcatenatingAudioSource? playlist,
       final ProgressBarState progressBarState,
       final RepeatState repeatState,
       final PlayerState playerState}) = _$PlayerViewModelImpl;
@@ -460,10 +418,6 @@ abstract class _PlayerViewModel extends PlayerViewModel {
   SongItem? get currentSongItem;
   @override
   List<SongItem> get songs;
-  @override
-  AudioPlayer? get audioPlayer;
-  @override
-  ConcatenatingAudioSource? get playlist;
   @override
   ProgressBarState get progressBarState;
   @override
