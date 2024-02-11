@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 
 part 'song.freezed.dart';
 part 'song.g.dart';
@@ -22,7 +23,10 @@ class SongItem with _$SongItem {
       _$SongItemFromJson(json);
 
   AudioSource get source {
-    return AudioSource.file(filePath);
+    return AudioSource.file(
+      filePath,
+      tag: MediaItem(id: id, title: title),
+    );
   }
 
   static String getCustomUniqueId({int length = 6}) {

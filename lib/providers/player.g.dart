@@ -6,7 +6,7 @@ part of 'player.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$playerHash() => r'083538b6b39ab21b5c06381c13dc8acebd15fd27';
+String _$playerHash() => r'cc0bc57c18b90a1ca39fbe111b324e9c3d59f07b';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,7 +29,8 @@ class _SystemHash {
   }
 }
 
-abstract class _$Player extends BuildlessAsyncNotifier<PlayerViewModel> {
+abstract class _$Player
+    extends BuildlessAutoDisposeAsyncNotifier<PlayerViewModel> {
   late final SongHiveRepository? repository;
   late final AudioPlayer? audioPlayer;
 
@@ -86,7 +87,7 @@ class PlayerFamily extends Family<AsyncValue<PlayerViewModel>> {
 
 /// See also [Player].
 class PlayerProvider
-    extends AsyncNotifierProviderImpl<Player, PlayerViewModel> {
+    extends AutoDisposeAsyncNotifierProviderImpl<Player, PlayerViewModel> {
   /// See also [Player].
   PlayerProvider({
     SongHiveRepository? repository,
@@ -151,7 +152,8 @@ class PlayerProvider
   }
 
   @override
-  AsyncNotifierProviderElement<Player, PlayerViewModel> createElement() {
+  AutoDisposeAsyncNotifierProviderElement<Player, PlayerViewModel>
+      createElement() {
     return _PlayerProviderElement(this);
   }
 
@@ -172,7 +174,7 @@ class PlayerProvider
   }
 }
 
-mixin PlayerRef on AsyncNotifierProviderRef<PlayerViewModel> {
+mixin PlayerRef on AutoDisposeAsyncNotifierProviderRef<PlayerViewModel> {
   /// The parameter `repository` of this provider.
   SongHiveRepository? get repository;
 
@@ -181,7 +183,7 @@ mixin PlayerRef on AsyncNotifierProviderRef<PlayerViewModel> {
 }
 
 class _PlayerProviderElement
-    extends AsyncNotifierProviderElement<Player, PlayerViewModel>
+    extends AutoDisposeAsyncNotifierProviderElement<Player, PlayerViewModel>
     with PlayerRef {
   _PlayerProviderElement(super.provider);
 
