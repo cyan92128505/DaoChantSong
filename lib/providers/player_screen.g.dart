@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'player.dart';
+part of 'player_screen.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$playerHash() => r'cc0bc57c18b90a1ca39fbe111b324e9c3d59f07b';
+String _$playerScreenHash() => r'd62d5ee968c75100b65935b07b34ef105099703b';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-abstract class _$Player
+abstract class _$PlayerScreen
     extends BuildlessAutoDisposeAsyncNotifier<PlayerViewModel> {
   late final SongHiveRepository? repository;
   late final AudioPlayer? audioPlayer;
@@ -40,29 +40,29 @@ abstract class _$Player
   });
 }
 
-/// See also [Player].
-@ProviderFor(Player)
-const playerProvider = PlayerFamily();
+/// See also [PlayerScreen].
+@ProviderFor(PlayerScreen)
+const playerScreenProvider = PlayerScreenFamily();
 
-/// See also [Player].
-class PlayerFamily extends Family<AsyncValue<PlayerViewModel>> {
-  /// See also [Player].
-  const PlayerFamily();
+/// See also [PlayerScreen].
+class PlayerScreenFamily extends Family<AsyncValue<PlayerViewModel>> {
+  /// See also [PlayerScreen].
+  const PlayerScreenFamily();
 
-  /// See also [Player].
-  PlayerProvider call({
+  /// See also [PlayerScreen].
+  PlayerScreenProvider call({
     SongHiveRepository? repository,
     AudioPlayer? audioPlayer,
   }) {
-    return PlayerProvider(
+    return PlayerScreenProvider(
       repository: repository,
       audioPlayer: audioPlayer,
     );
   }
 
   @override
-  PlayerProvider getProviderOverride(
-    covariant PlayerProvider provider,
+  PlayerScreenProvider getProviderOverride(
+    covariant PlayerScreenProvider provider,
   ) {
     return call(
       repository: provider.repository,
@@ -82,33 +82,34 @@ class PlayerFamily extends Family<AsyncValue<PlayerViewModel>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'playerProvider';
+  String? get name => r'playerScreenProvider';
 }
 
-/// See also [Player].
-class PlayerProvider
-    extends AutoDisposeAsyncNotifierProviderImpl<Player, PlayerViewModel> {
-  /// See also [Player].
-  PlayerProvider({
+/// See also [PlayerScreen].
+class PlayerScreenProvider extends AutoDisposeAsyncNotifierProviderImpl<
+    PlayerScreen, PlayerViewModel> {
+  /// See also [PlayerScreen].
+  PlayerScreenProvider({
     SongHiveRepository? repository,
     AudioPlayer? audioPlayer,
   }) : this._internal(
-          () => Player()
+          () => PlayerScreen()
             ..repository = repository
             ..audioPlayer = audioPlayer,
-          from: playerProvider,
-          name: r'playerProvider',
+          from: playerScreenProvider,
+          name: r'playerScreenProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$playerHash,
-          dependencies: PlayerFamily._dependencies,
-          allTransitiveDependencies: PlayerFamily._allTransitiveDependencies,
+                  : _$playerScreenHash,
+          dependencies: PlayerScreenFamily._dependencies,
+          allTransitiveDependencies:
+              PlayerScreenFamily._allTransitiveDependencies,
           repository: repository,
           audioPlayer: audioPlayer,
         );
 
-  PlayerProvider._internal(
+  PlayerScreenProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -124,7 +125,7 @@ class PlayerProvider
 
   @override
   FutureOr<PlayerViewModel> runNotifierBuild(
-    covariant Player notifier,
+    covariant PlayerScreen notifier,
   ) {
     return notifier.build(
       repository: repository,
@@ -133,10 +134,10 @@ class PlayerProvider
   }
 
   @override
-  Override overrideWith(Player Function() create) {
+  Override overrideWith(PlayerScreen Function() create) {
     return ProviderOverride(
       origin: this,
-      override: PlayerProvider._internal(
+      override: PlayerScreenProvider._internal(
         () => create()
           ..repository = repository
           ..audioPlayer = audioPlayer,
@@ -152,14 +153,14 @@ class PlayerProvider
   }
 
   @override
-  AutoDisposeAsyncNotifierProviderElement<Player, PlayerViewModel>
+  AutoDisposeAsyncNotifierProviderElement<PlayerScreen, PlayerViewModel>
       createElement() {
-    return _PlayerProviderElement(this);
+    return _PlayerScreenProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is PlayerProvider &&
+    return other is PlayerScreenProvider &&
         other.repository == repository &&
         other.audioPlayer == audioPlayer;
   }
@@ -174,7 +175,7 @@ class PlayerProvider
   }
 }
 
-mixin PlayerRef on AutoDisposeAsyncNotifierProviderRef<PlayerViewModel> {
+mixin PlayerScreenRef on AutoDisposeAsyncNotifierProviderRef<PlayerViewModel> {
   /// The parameter `repository` of this provider.
   SongHiveRepository? get repository;
 
@@ -182,15 +183,16 @@ mixin PlayerRef on AutoDisposeAsyncNotifierProviderRef<PlayerViewModel> {
   AudioPlayer? get audioPlayer;
 }
 
-class _PlayerProviderElement
-    extends AutoDisposeAsyncNotifierProviderElement<Player, PlayerViewModel>
-    with PlayerRef {
-  _PlayerProviderElement(super.provider);
+class _PlayerScreenProviderElement
+    extends AutoDisposeAsyncNotifierProviderElement<PlayerScreen,
+        PlayerViewModel> with PlayerScreenRef {
+  _PlayerScreenProviderElement(super.provider);
 
   @override
-  SongHiveRepository? get repository => (origin as PlayerProvider).repository;
+  SongHiveRepository? get repository =>
+      (origin as PlayerScreenProvider).repository;
   @override
-  AudioPlayer? get audioPlayer => (origin as PlayerProvider).audioPlayer;
+  AudioPlayer? get audioPlayer => (origin as PlayerScreenProvider).audioPlayer;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

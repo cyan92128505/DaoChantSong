@@ -1,14 +1,16 @@
 import 'package:dao/models/song.dart';
+import 'package:dao/providers/audio_player.dart';
 import 'package:dao/repositories/song_hive_repository.dart';
 import 'package:dao/services/song_hive_service.dart';
 import 'package:file_picker_pro/file_data.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:just_audio/just_audio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'player.g.dart';
-part 'player.freezed.dart';
+part 'player_screen.g.dart';
+part 'player_screen.freezed.dart';
 
 enum PlayerState {
   paused,
@@ -43,23 +45,18 @@ class PlayerViewModel with _$PlayerViewModel {
     @Default(ProgressBarState()) ProgressBarState progressBarState,
     @Default(RepeatState.off) RepeatState repeatState,
     @Default(PlayerState.paused) PlayerState playerState,
-    @Default(null) AudioPlayer? audioPlayer,
   }) = _PlayerViewModel;
 }
 
 @riverpod
-class Player extends _$Player {
+class PlayerScreen extends _$PlayerScreen {
   @override
   FutureOr<PlayerViewModel> build({
     SongHiveRepository? repository,
     AudioPlayer? audioPlayer,
   }) async {
     final viewModel = await getPlayList(initial: true);
-
-    ref.onDispose(() {
-      viewModel.audioPlayer?.dispose();
-    });
-
+    setupAudioPlayer();
     _listenForChangesInPlayerState();
     _listenForChangesInPlayerPosition();
     _listenForChangesInBufferedPosition();
@@ -69,8 +66,17 @@ class Player extends _$Player {
   }
 
   PlayerViewModel get _viewModel =>
-      state.asData?.value ?? PlayerViewModel(audioPlayer: AudioPlayer());
+      state.asData?.value ?? const PlayerViewModel();
   SongHiveService get _service => SongHiveService(repository: repository);
+
+  Future<void> setupAudioPlayer() async {
+    try {
+      final audioPlayer = ref.read(appAudioPlayerProvider);
+      await audioPlayer.pause();
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   Future<PlayerViewModel> getPlayList({
     bool initial = false,
@@ -102,7 +108,7 @@ class Player extends _$Player {
     if (_viewModel.currentSongItem?.id == songItem.id) {
       state = AsyncData(_viewModel.copyWith(currentSongItem: null));
 
-      _viewModel.audioPlayer?.pause();
+      ref.read(appAudioPlayerProvider).pause();
     }
     _service.removeSong(songItem);
     getPlayList();
@@ -116,33 +122,30 @@ class Player extends _$Player {
     if (_viewModel.currentSongItem?.id != songItem.id) {
       state = AsyncData(_viewModel.copyWith(currentSongItem: songItem));
 
-      _viewModel.audioPlayer?.pause();
+      ref.read(appAudioPlayerProvider).pause();
 
-      _viewModel.audioPlayer
-          ?.setAudioSource(ConcatenatingAudioSource(children: [
-        songItem.source,
-      ]));
+      ref.read(appAudioPlayerProvider).setFilePath(songItem.filePath);
     } else {
       if (_viewModel.playerState == PlayerState.paused) {
-        _viewModel.audioPlayer?.play();
+        ref.read(appAudioPlayerProvider).play();
       }
 
       if (_viewModel.playerState == PlayerState.playing) {
-        _viewModel.audioPlayer?.pause();
+        ref.read(appAudioPlayerProvider).pause();
       }
     }
   }
 
   void pause() {
-    _viewModel.audioPlayer?.pause();
+    ref.read(appAudioPlayerProvider).pause();
   }
 
   void seek(Duration position) {
-    _viewModel.audioPlayer?.seek(position);
+    ref.read(appAudioPlayerProvider).seek(position);
   }
 
   void _listenForChangesInPlayerState() {
-    _viewModel.audioPlayer?.playerStateStream.listen((playerState) {
+    ref.read(appAudioPlayerProvider).playerStateStream.listen((playerState) {
       final isPlaying = playerState.playing;
       final processingState = playerState.processingState;
       if (processingState == ProcessingState.loading ||
@@ -159,14 +162,14 @@ class Player extends _$Player {
           playerState: PlayerState.playing,
         ));
       } else {
-        _viewModel.audioPlayer?.seek(Duration.zero);
-        _viewModel.audioPlayer?.pause();
+        ref.read(appAudioPlayerProvider).seek(Duration.zero);
+        ref.read(appAudioPlayerProvider).pause();
       }
     });
   }
 
   void _listenForChangesInPlayerPosition() {
-    _viewModel.audioPlayer?.positionStream.listen((position) {
+    ref.read(appAudioPlayerProvider).positionStream.listen((position) {
       final oldState = _viewModel.progressBarState;
       state = AsyncData(
         _viewModel.copyWith(
@@ -181,7 +184,10 @@ class Player extends _$Player {
   }
 
   void _listenForChangesInBufferedPosition() {
-    _viewModel.audioPlayer?.bufferedPositionStream.listen((bufferedPosition) {
+    ref
+        .read(appAudioPlayerProvider)
+        .bufferedPositionStream
+        .listen((bufferedPosition) {
       final oldState = _viewModel.progressBarState;
       state = AsyncData(
         _viewModel.copyWith(
@@ -196,7 +202,7 @@ class Player extends _$Player {
   }
 
   void _listenForChangesInTotalDuration() {
-    _viewModel.audioPlayer?.durationStream.listen((totalDuration) {
+    ref.read(appAudioPlayerProvider).durationStream.listen((totalDuration) {
       final oldState = _viewModel.progressBarState;
       state = AsyncData(
         _viewModel.copyWith(

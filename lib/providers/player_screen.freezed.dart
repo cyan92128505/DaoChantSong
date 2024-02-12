@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'player.dart';
+part of 'player_screen.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -183,7 +183,6 @@ mixin _$PlayerViewModel {
   ProgressBarState get progressBarState => throw _privateConstructorUsedError;
   RepeatState get repeatState => throw _privateConstructorUsedError;
   PlayerState get playerState => throw _privateConstructorUsedError;
-  AudioPlayer? get audioPlayer => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PlayerViewModelCopyWith<PlayerViewModel> get copyWith =>
@@ -201,8 +200,7 @@ abstract class $PlayerViewModelCopyWith<$Res> {
       List<SongItem> songs,
       ProgressBarState progressBarState,
       RepeatState repeatState,
-      PlayerState playerState,
-      AudioPlayer? audioPlayer});
+      PlayerState playerState});
 
   $SongItemCopyWith<$Res>? get currentSongItem;
   $ProgressBarStateCopyWith<$Res> get progressBarState;
@@ -226,7 +224,6 @@ class _$PlayerViewModelCopyWithImpl<$Res, $Val extends PlayerViewModel>
     Object? progressBarState = null,
     Object? repeatState = null,
     Object? playerState = null,
-    Object? audioPlayer = freezed,
   }) {
     return _then(_value.copyWith(
       currentSongItem: freezed == currentSongItem
@@ -249,10 +246,6 @@ class _$PlayerViewModelCopyWithImpl<$Res, $Val extends PlayerViewModel>
           ? _value.playerState
           : playerState // ignore: cast_nullable_to_non_nullable
               as PlayerState,
-      audioPlayer: freezed == audioPlayer
-          ? _value.audioPlayer
-          : audioPlayer // ignore: cast_nullable_to_non_nullable
-              as AudioPlayer?,
     ) as $Val);
   }
 
@@ -290,8 +283,7 @@ abstract class _$$PlayerViewModelImplCopyWith<$Res>
       List<SongItem> songs,
       ProgressBarState progressBarState,
       RepeatState repeatState,
-      PlayerState playerState,
-      AudioPlayer? audioPlayer});
+      PlayerState playerState});
 
   @override
   $SongItemCopyWith<$Res>? get currentSongItem;
@@ -315,7 +307,6 @@ class __$$PlayerViewModelImplCopyWithImpl<$Res>
     Object? progressBarState = null,
     Object? repeatState = null,
     Object? playerState = null,
-    Object? audioPlayer = freezed,
   }) {
     return _then(_$PlayerViewModelImpl(
       currentSongItem: freezed == currentSongItem
@@ -338,10 +329,6 @@ class __$$PlayerViewModelImplCopyWithImpl<$Res>
           ? _value.playerState
           : playerState // ignore: cast_nullable_to_non_nullable
               as PlayerState,
-      audioPlayer: freezed == audioPlayer
-          ? _value.audioPlayer
-          : audioPlayer // ignore: cast_nullable_to_non_nullable
-              as AudioPlayer?,
     ));
   }
 }
@@ -354,8 +341,7 @@ class _$PlayerViewModelImpl extends _PlayerViewModel {
       final List<SongItem> songs = const <SongItem>[],
       this.progressBarState = const ProgressBarState(),
       this.repeatState = RepeatState.off,
-      this.playerState = PlayerState.paused,
-      this.audioPlayer = null})
+      this.playerState = PlayerState.paused})
       : _songs = songs,
         super._();
 
@@ -380,13 +366,10 @@ class _$PlayerViewModelImpl extends _PlayerViewModel {
   @override
   @JsonKey()
   final PlayerState playerState;
-  @override
-  @JsonKey()
-  final AudioPlayer? audioPlayer;
 
   @override
   String toString() {
-    return 'PlayerViewModel(currentSongItem: $currentSongItem, songs: $songs, progressBarState: $progressBarState, repeatState: $repeatState, playerState: $playerState, audioPlayer: $audioPlayer)';
+    return 'PlayerViewModel(currentSongItem: $currentSongItem, songs: $songs, progressBarState: $progressBarState, repeatState: $repeatState, playerState: $playerState)';
   }
 
   @override
@@ -402,9 +385,7 @@ class _$PlayerViewModelImpl extends _PlayerViewModel {
             (identical(other.repeatState, repeatState) ||
                 other.repeatState == repeatState) &&
             (identical(other.playerState, playerState) ||
-                other.playerState == playerState) &&
-            (identical(other.audioPlayer, audioPlayer) ||
-                other.audioPlayer == audioPlayer));
+                other.playerState == playerState));
   }
 
   @override
@@ -414,8 +395,7 @@ class _$PlayerViewModelImpl extends _PlayerViewModel {
       const DeepCollectionEquality().hash(_songs),
       progressBarState,
       repeatState,
-      playerState,
-      audioPlayer);
+      playerState);
 
   @JsonKey(ignore: true)
   @override
@@ -431,8 +411,7 @@ abstract class _PlayerViewModel extends PlayerViewModel {
       final List<SongItem> songs,
       final ProgressBarState progressBarState,
       final RepeatState repeatState,
-      final PlayerState playerState,
-      final AudioPlayer? audioPlayer}) = _$PlayerViewModelImpl;
+      final PlayerState playerState}) = _$PlayerViewModelImpl;
   const _PlayerViewModel._() : super._();
 
   @override
@@ -445,8 +424,6 @@ abstract class _PlayerViewModel extends PlayerViewModel {
   RepeatState get repeatState;
   @override
   PlayerState get playerState;
-  @override
-  AudioPlayer? get audioPlayer;
   @override
   @JsonKey(ignore: true)
   _$$PlayerViewModelImplCopyWith<_$PlayerViewModelImpl> get copyWith =>

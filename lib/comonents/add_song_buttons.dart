@@ -1,4 +1,4 @@
-import 'package:dao/providers/player.dart';
+import 'package:dao/providers/player_screen.dart';
 import 'package:file_picker_pro/file_data.dart';
 import 'package:file_picker_pro/file_picker.dart';
 import 'package:file_picker_pro/files.dart';
@@ -24,7 +24,7 @@ class AddSongPanel extends HookConsumerWidget {
       ],
       onSelected: (fileData) {
         currentFileData.value = fileData;
-        ref.read(playerProvider().notifier).addSong(fileData);
+        ref.read(playerScreenProvider().notifier).addSong(fileData);
       },
       onCancel: (message, messageCode) {},
     );
