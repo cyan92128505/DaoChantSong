@@ -4,6 +4,7 @@ file_picker_pro \
 flutter_hooks \
 flutter_svg \
 freezed_annotation \
+json_annotation \
 go_router_plus \
 hive \
 hive_flutter \
