@@ -42,9 +42,10 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-
 # VSCode Setting
 .vscode/
 
 # FVM Cache
-.fvm/flutter_sdk
+
+# FVM Version Cache
+.fvm/
