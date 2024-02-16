@@ -123,14 +123,13 @@ class PlayerScreen extends _$PlayerScreen {
       state = AsyncData(_viewModel.copyWith(currentSongItem: songItem));
 
       ref.read(appAudioPlayerProvider).pause();
-
       ref.read(appAudioPlayerProvider).setFilePath(songItem.filePath);
+      ref.read(appAudioPlayerProvider).play();
     } else {
       if (_viewModel.playerState == PlayerState.paused) {
         ref.read(appAudioPlayerProvider).play();
-      }
-
-      if (_viewModel.playerState == PlayerState.playing) {
+      } else {
+        state = AsyncData(_viewModel.copyWith(currentSongItem: null));
         ref.read(appAudioPlayerProvider).pause();
       }
     }
