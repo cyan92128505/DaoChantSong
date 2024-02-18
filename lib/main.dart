@@ -21,8 +21,8 @@ void main() async {
 
   final router = createGoRouter(
     screens: [
-      SplashScreen(),
-      PlayerScreen(),
+      Splash(),
+      Player(),
     ],
     refreshNotifiers: [],
   );

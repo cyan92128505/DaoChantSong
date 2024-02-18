@@ -13,7 +13,9 @@ Future<bool> confirm(
   Widget? title,
   Widget? content,
   Widget? actionOK,
+  String? actionOKText,
   Widget? actionCancel,
+  String? actionCancelText,
 }) async {
   final isConfirm = await showDialog<bool>(
     context: context,
@@ -38,7 +40,8 @@ Future<bool> confirm(
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
                 child: Text(
-                  MaterialLocalizations.of(context).cancelButtonLabel,
+                  actionCancelText ??
+                      MaterialLocalizations.of(context).cancelButtonLabel,
                 ),
                 onPressed: () {
                   if (context.canPop()) {
@@ -58,7 +61,8 @@ Future<bool> confirm(
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
                 child: Text(
-                  MaterialLocalizations.of(context).okButtonLabel,
+                  actionOKText ??
+                      MaterialLocalizations.of(context).okButtonLabel,
                 ),
                 onPressed: () {
                   if (context.canPop()) {

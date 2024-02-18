@@ -1,3 +1,5 @@
+import 'package:dao/assets/logo_svg.dart';
+import 'package:dao/configs/theme.dart';
 import 'package:dao/hooks/use_screen_size.dart';
 import 'package:dao/screens/player.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router_plus/go_router_plus.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SplashScreen extends Screen {
+class Splash extends Screen {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const _SplashScreen();
@@ -28,7 +30,7 @@ class _SplashScreen extends HookConsumerWidget {
 
     useEffect(() {
       Future.delayed(const Duration(milliseconds: 777)).then((_) {
-        GoRouter.of(context).go(PlayerScreen().routePath);
+        GoRouter.of(context).go(Player().routePath);
       });
       return null;
     }, []);
@@ -39,17 +41,12 @@ class _SplashScreen extends HookConsumerWidget {
           Expanded(
             child: Center(
               child: SvgPicture.string(
-                '''<svg width="300" height="392" viewBox="0 0 300 392" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M9 222C9 205.431 22.4315 192 39 192H261C277.569 192 291 205.431 291 222V222C291 238.569 277.569 252 261 252H39C22.4315 252 9 238.569 9 222V222Z" fill="#DF826C"/>
-<path d="M0 314C0 270.922 34.9218 236 78 236H222C265.078 236 300 270.922 300 314V314C300 357.078 265.078 392 222 392H78C34.9218 392 0 357.078 0 314V314Z" fill="#DF826C"/>
-<path d="M56 85H110V173C110 177.418 106.418 181 102 181H64C59.5817 181 56 177.418 56 173V85Z" fill="#DF826C"/>
-<path d="M190 85H244V173C244 177.418 240.418 181 236 181H198C193.582 181 190 177.418 190 173V85Z" fill="#DF826C"/>
-<path d="M190 54C190 45.1634 197.163 38 206 38H228C236.837 38 244 45.1634 244 54V74H190V54Z" fill="#DF826C"/>
-<path d="M56 54C56 45.1634 63.1634 38 72 38H94C102.837 38 110 45.1634 110 54V74H56V54Z" fill="#DF826C"/>
-<path d="M123 16C123 7.16344 130.163 0 139 0H161C169.837 0 177 7.16344 177 16V40H123V16Z" fill="#DF826C"/>
-<path d="M123 50H177V173C177 177.418 173.418 181 169 181H131C126.582 181 123 177.418 123 173V50Z" fill="#DF826C"/>
-</svg>''',
+                logoSvg,
                 width: size.width / 3,
+                colorFilter: ColorFilter.mode(
+                  AppColor.newYorkPink.value,
+                  BlendMode.modulate,
+                ),
               ),
             ),
           ),

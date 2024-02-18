@@ -5,7 +5,7 @@ import 'package:dao/comonents/play_list.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router_plus/go_router_plus.dart';
 
-class PlayerScreen extends Screen {
+class Player extends Screen {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const Scaffold(
