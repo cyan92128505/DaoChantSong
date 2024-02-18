@@ -24,8 +24,8 @@ class PlayerScreen extends Screen {
   }
 
   @override
-  String get routeName => 'home';
+  String get routeName => 'player';
 
   @override
-  String get routePath => '/';
+  String get routePath => '/player';
 }

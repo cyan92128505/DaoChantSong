@@ -2,6 +2,7 @@ import 'package:dao/configs/theme.dart';
 import 'package:dao/repositories/hive_repository.dart';
 import 'package:dao/repositories/song_hive_repository.dart';
 import 'package:dao/screens/player.dart';
+import 'package:dao/screens/splash.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router_plus/go_router_plus.dart';
@@ -20,6 +21,7 @@ void main() async {
 
   final router = createGoRouter(
     screens: [
+      SplashScreen(),
       PlayerScreen(),
     ],
     refreshNotifiers: [],

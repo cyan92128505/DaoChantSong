@@ -12,6 +12,7 @@ hooks_riverpod \
 just_audio \
 just_audio_background \
 riverpod_annotation \
+skeletonizer \
 dev:build_runner \
 dev:custom_lint \
 dev:freezed \

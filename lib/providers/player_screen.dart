@@ -41,12 +41,19 @@ class PlayerViewModel with _$PlayerViewModel {
   const PlayerViewModel._();
 
   const factory PlayerViewModel({
-    @Default(null) SongItem? currentSongItem,
     @Default(<SongItem>[]) List<SongItem> songs,
+    @Default(null) SongItem? currentSongItem,
     @Default(ProgressBarState()) ProgressBarState progressBarState,
-    @Default(RepeatState.off) RepeatState repeatState,
     @Default(PlayerState.paused) PlayerState playerState,
   }) = _PlayerViewModel;
+
+  PlayerViewModel clean() {
+    return copyWith(
+      currentSongItem: null,
+      progressBarState: const ProgressBarState(),
+      playerState: PlayerState.paused,
+    );
+  }
 }
 
 @riverpod
@@ -107,17 +114,13 @@ class PlayerScreen extends _$PlayerScreen {
 
   void removeSong(SongItem songItem) {
     if (_viewModel.currentSongItem?.id == songItem.id) {
-      state = AsyncData(_viewModel.copyWith(currentSongItem: null));
+      state = AsyncData(_viewModel.clean());
 
       ref.read(appAudioPlayerProvider).pause();
     }
     _service.removeSong(songItem);
     getPlayList();
   }
-
-  void onRepeatButtonPressed() {}
-
-  void onPreviousSongButtonPressed() {}
 
   void play(SongItem songItem) async {
     try {
@@ -136,7 +139,7 @@ class PlayerScreen extends _$PlayerScreen {
         if (_viewModel.playerState == PlayerState.paused) {
           await ref.read(appAudioPlayerProvider).play();
         } else {
-          state = AsyncData(_viewModel.copyWith(currentSongItem: null));
+          state = AsyncData(_viewModel.clean());
           await ref.read(appAudioPlayerProvider).pause();
         }
       }
@@ -179,7 +182,7 @@ class PlayerScreen extends _$PlayerScreen {
       } else {
         ref.read(appAudioPlayerProvider).seek(Duration.zero);
         ref.read(appAudioPlayerProvider).pause();
-        state = AsyncData(_viewModel.copyWith(currentSongItem: null));
+        state = AsyncData(_viewModel.clean());
       }
     });
   }

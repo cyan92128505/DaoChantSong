@@ -5,6 +5,10 @@ enum AppColor {
   primary(Color(0xFF5F939A)),
   secondary(Color(0xFF3A6351)),
   text(Color(0xFFA0937D)),
+  newYorkPink(Color(0xFFDF826C)),
+  cream(Color(0xFFF8FFD2)),
+  sulu(Color(0xFFD0F288)),
+  riptide(Color(0xFF8ADAB2)),
   pure(Color(0xFFF2EDD7));
 
   const AppColor(this.value);

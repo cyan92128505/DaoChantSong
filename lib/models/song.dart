@@ -15,6 +15,7 @@ class SongItem with _$SongItem {
     @Default('') @JsonKey(name: 'filePath') String filePath,
     @Default(null) @JsonKey(name: 'created_at') DateTime? createdAt,
     @Default(null) @JsonKey(name: 'updated_at') DateTime? updatedAt,
+    @Default(0) @JsonKey(name: 'count') int count,
   }) = _SongItem;
 
   factory SongItem.fromJson(Map<String, dynamic> json) =>
