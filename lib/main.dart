@@ -1,6 +1,7 @@
 import 'package:dao/repositories/hive_repository.dart';
 import 'package:dao/repositories/song_hive_repository.dart';
 import 'package:dao/screens/player.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router_plus/go_router_plus.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -25,6 +26,7 @@ void main() async {
   runApp(
     ProviderScope(
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: kDebugMode,
         routeInformationParser: router.routeInformationParser,
         routerDelegate: router.routerDelegate,
         routeInformationProvider: router.routeInformationProvider,

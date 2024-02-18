@@ -16,10 +16,10 @@ class PlayerScreen extends Screen {
             CurrentSongTitle(),
             AudioProgressBar(),
             Playlist(),
-            AddSongPanel(),
           ],
         ),
       ),
+      floatingActionButton: AddSongButton(),
     );
   }
 
