@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:just_audio/just_audio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'player_screen.g.dart';
@@ -119,19 +120,34 @@ class PlayerScreen extends _$PlayerScreen {
   void onPreviousSongButtonPressed() {}
 
   void play(SongItem songItem) async {
-    if (_viewModel.currentSongItem?.id != songItem.id) {
-      state = AsyncData(_viewModel.copyWith(currentSongItem: songItem));
+    try {
+      if (_viewModel.currentSongItem?.id != songItem.id) {
+        state = AsyncData(_viewModel.copyWith(currentSongItem: songItem));
 
-      ref.read(appAudioPlayerProvider).pause();
-      ref.read(appAudioPlayerProvider).setFilePath(songItem.filePath);
-      ref.read(appAudioPlayerProvider).play();
-    } else {
-      if (_viewModel.playerState == PlayerState.paused) {
-        ref.read(appAudioPlayerProvider).play();
+        await ref.read(appAudioPlayerProvider).pause();
+        final source = AudioSource.file(songItem.filePath,
+            tag: MediaItem(
+              id: songItem.id,
+              title: songItem.title,
+            ));
+        await ref.read(appAudioPlayerProvider).setAudioSource(source);
+        await ref.read(appAudioPlayerProvider).play();
       } else {
-        state = AsyncData(_viewModel.copyWith(currentSongItem: null));
-        ref.read(appAudioPlayerProvider).pause();
+        if (_viewModel.playerState == PlayerState.paused) {
+          await ref.read(appAudioPlayerProvider).play();
+        } else {
+          state = AsyncData(_viewModel.copyWith(currentSongItem: null));
+          await ref.read(appAudioPlayerProvider).pause();
+        }
       }
+    } on PlayerException catch (e) {
+      debugPrint("Error code: ${e.code}");
+      debugPrint("Error message: ${e.message}");
+    } on PlayerInterruptedException catch (e) {
+      debugPrint("Connection aborted: ${e.message}");
+    } catch (e) {
+      // Fallback for all other errors
+      debugPrint('An error occured: $e');
     }
   }
 

@@ -9,9 +9,13 @@ class AppAudioPlayer extends _$AppAudioPlayer {
   @override
   AudioPlayer build() {
     debugPrint('AudioPlayer Start');
-    ref.onDispose(() {
-      state.dispose();
+
+    Future.delayed(const Duration(milliseconds: 77)).then((_) {
+      ref.onDispose(() {
+        state.dispose();
+      });
     });
+
     return AudioPlayer();
   }
 }
