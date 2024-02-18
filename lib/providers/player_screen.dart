@@ -179,6 +179,7 @@ class PlayerScreen extends _$PlayerScreen {
       } else {
         ref.read(appAudioPlayerProvider).seek(Duration.zero);
         ref.read(appAudioPlayerProvider).pause();
+        state = AsyncData(_viewModel.copyWith(currentSongItem: null));
       }
     });
   }
