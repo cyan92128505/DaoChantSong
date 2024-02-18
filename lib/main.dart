@@ -1,3 +1,4 @@
+import 'package:dao/configs/theme.dart';
 import 'package:dao/repositories/hive_repository.dart';
 import 'package:dao/repositories/song_hive_repository.dart';
 import 'package:dao/screens/player.dart';
@@ -27,6 +28,7 @@ void main() async {
     ProviderScope(
       child: MaterialApp.router(
         debugShowCheckedModeBanner: kDebugMode,
+        theme: defaultThemeData,
         routeInformationParser: router.routeInformationParser,
         routerDelegate: router.routerDelegate,
         routeInformationProvider: router.routeInformationProvider,
