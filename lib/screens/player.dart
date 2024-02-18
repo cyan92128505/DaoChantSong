@@ -8,18 +8,37 @@ import 'package:go_router_plus/go_router_plus.dart';
 class Player extends Screen {
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            CurrentSongTitle(),
-            AudioProgressBar(),
-            Playlist(),
-          ],
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        title: const CurrentSongTitle(),
       ),
-      floatingActionButton: AddSongButton(),
+      body: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: const Offset(0, 3), // changes position of shadow
+                ),
+              ],
+            ),
+            padding: const EdgeInsets.all(16),
+            child: const Column(
+              children: [
+                AudioProgressBar(),
+              ],
+            ),
+          ),
+          const Playlist(),
+        ],
+      ),
+      floatingActionButton: const AddSongButton(),
     );
   }
 

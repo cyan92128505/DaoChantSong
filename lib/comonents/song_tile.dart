@@ -16,34 +16,39 @@ class SongTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ListTile(
-      shape: RoundedRectangleBorder(
-        side: const BorderSide(width: 2),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      title: Text(songItem.title),
-      trailing: Icon(
-        isPlay ? Icons.pause : Icons.play_arrow,
-      ),
-      onLongPress: () async {
-        final result = await confirm(
-          context,
-          title: Text('要刪除 ${songItem.title} ？'),
-          content: Container(),
-          actionOKText: '確定',
-          actionCancelText: '取消',
-        );
-        if (result) {
-          ref.read(playerScreenProvider().notifier).removeSong(
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: ListTile(
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(width: 2),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        title: Text(
+          songItem.title,
+        ),
+        trailing: Icon(
+          isPlay ? Icons.pause : Icons.play_arrow,
+        ),
+        onLongPress: () async {
+          final result = await confirm(
+            context,
+            title: Text('要刪除 ${songItem.title} ？'),
+            content: Container(),
+            actionOKText: '確定',
+            actionCancelText: '取消',
+          );
+          if (result) {
+            ref.read(playerScreenProvider().notifier).removeSong(
+                  songItem,
+                );
+          }
+        },
+        onTap: () {
+          ref.read(playerScreenProvider().notifier).play(
                 songItem,
               );
-        }
-      },
-      onTap: () {
-        ref.read(playerScreenProvider().notifier).play(
-              songItem,
-            );
-      },
+        },
+      ),
     );
   }
 }

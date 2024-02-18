@@ -1,3 +1,4 @@
+import 'package:dao/configs/theme.dart';
 import 'package:dao/providers/player_screen.dart';
 import 'package:file_picker_pro/file_data.dart';
 import 'package:file_picker_pro/files.dart';
@@ -12,6 +13,8 @@ class AddSongButton extends HookConsumerWidget {
     final currentFileData = useState<FileData>(FileData());
 
     return IconButton(
+      color: Colors.white,
+      style: IconButton.styleFrom(backgroundColor: AppColor.primary.value),
       iconSize: 64,
       icon: const Icon(
         Icons.add,

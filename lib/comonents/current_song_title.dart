@@ -9,9 +9,10 @@ class CurrentSongTitle extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return DataSourceWrap(ref.watch(playerScreenProvider()), (viewModel) {
       return Padding(
-        padding: const EdgeInsets.only(top: 8.0),
+        padding: const EdgeInsets.symmetric(vertical: 16),
         child: Text(
           viewModel.currentSongItem?.title ?? '未播放',
+          overflow: TextOverflow.ellipsis,
           style: const TextStyle(
             fontSize: 40,
           ),
