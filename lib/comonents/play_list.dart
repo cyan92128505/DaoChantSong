@@ -14,12 +14,15 @@ class Playlist extends HookConsumerWidget {
       (viewModel) {
         return Expanded(
           child: viewModel.songs.isNotEmpty
-              ? ListView.builder(
-                  itemCount: viewModel.songs.length,
-                  itemBuilder: (context, index) => SongTile(
-                    isPlay: viewModel.currentSongItem?.id ==
-                        viewModel.songs[index].id,
-                    songItem: viewModel.songs[index],
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 24),
+                  child: ListView.builder(
+                    itemCount: viewModel.songs.length,
+                    itemBuilder: (context, index) => SongTile(
+                      isPlay: viewModel.currentSongItem?.id ==
+                          viewModel.songs[index].id,
+                      songItem: viewModel.songs[index],
+                    ),
                   ),
                 )
               : const EmptyItem(),
