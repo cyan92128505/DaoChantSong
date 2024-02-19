@@ -26,6 +26,7 @@ class SongTile extends HookConsumerWidget {
         title: Text(
           songItem.title,
         ),
+        subtitle: Text('播放次數：${songItem.count}'),
         trailing: Icon(
           isPlay ? Icons.pause : Icons.play_arrow,
         ),

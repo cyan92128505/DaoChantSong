@@ -124,6 +124,13 @@ class PlayerScreen extends _$PlayerScreen {
 
   void play(SongItem songItem) async {
     try {
+      if (_viewModel.currentSongItem?.id == songItem.id &&
+          _viewModel.playerState != PlayerState.paused) {
+        state = AsyncData(_viewModel.clean());
+        await ref.read(appAudioPlayerProvider).pause();
+        return;
+      }
+
       if (_viewModel.currentSongItem?.id != songItem.id) {
         state = AsyncData(_viewModel.copyWith(currentSongItem: songItem));
 
@@ -134,15 +141,25 @@ class PlayerScreen extends _$PlayerScreen {
               title: songItem.title,
             ));
         await ref.read(appAudioPlayerProvider).setAudioSource(source);
-        await ref.read(appAudioPlayerProvider).play();
-      } else {
-        if (_viewModel.playerState == PlayerState.paused) {
-          await ref.read(appAudioPlayerProvider).play();
-        } else {
-          state = AsyncData(_viewModel.clean());
-          await ref.read(appAudioPlayerProvider).pause();
-        }
       }
+
+      ref.read(appAudioPlayerProvider).play();
+      final countSongItem = songItem.copyWith(
+        count: songItem.count + 1,
+      );
+      _service.updateSong(
+        countSongItem,
+      );
+
+      var songs = _viewModel.songs.toList();
+      songs = songs.map((e) {
+        if (e.id == songItem.id) {
+          return countSongItem;
+        }
+        return e;
+      }).toList();
+
+      state = AsyncData(_viewModel.copyWith(songs: songs));
     } on PlayerException catch (e) {
       debugPrint("Error code: ${e.code}");
       debugPrint("Error message: ${e.message}");

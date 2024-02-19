@@ -34,6 +34,10 @@ class SongHiveService {
     await _repository.put(songItem.id, json.encode(songItem.toJson()));
   }
 
+  Future<void> updateSong(SongItem songItem) async {
+    await _repository.put(songItem.id, json.encode(songItem.toJson()));
+  }
+
   Future<void> removeSong(SongItem songItem) async {
     await _repository.box!.delete(
       songItem.id,
