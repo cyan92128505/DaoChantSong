@@ -147,19 +147,7 @@ class PlayerScreen extends _$PlayerScreen {
       final countSongItem = songItem.copyWith(
         count: songItem.count + 1,
       );
-      _service.updateSong(
-        countSongItem,
-      );
-
-      var songs = _viewModel.songs.toList();
-      songs = songs.map((e) {
-        if (e.id == songItem.id) {
-          return countSongItem;
-        }
-        return e;
-      }).toList();
-
-      state = AsyncData(_viewModel.copyWith(songs: songs));
+      updateSongItem(countSongItem);
     } on PlayerException catch (e) {
       debugPrint("Error code: ${e.code}");
       debugPrint("Error message: ${e.message}");
@@ -169,6 +157,21 @@ class PlayerScreen extends _$PlayerScreen {
       // Fallback for all other errors
       debugPrint('An error occured: $e');
     }
+  }
+
+  updateSongItem(SongItem songItem) {
+    _service.updateSong(
+      songItem,
+    );
+    var songs = _viewModel.songs.toList();
+    songs = songs.map((e) {
+      if (e.id == songItem.id) {
+        return songItem;
+      }
+      return e;
+    }).toList();
+
+    state = AsyncData(_viewModel.copyWith(songs: songs));
   }
 
   void pause() {

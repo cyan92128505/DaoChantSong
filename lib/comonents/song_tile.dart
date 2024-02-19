@@ -4,6 +4,7 @@ import 'package:dao/hooks/use_screen_size.dart';
 import 'package:dao/models/song.dart';
 import 'package:dao/providers/player_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -20,39 +21,46 @@ class SongTile extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ratio = useScreenSize().width / 4 / useScreenSize().width;
+    final editMode = useState(false);
+    final textEditingController =
+        useTextEditingController(text: songItem.title);
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: Slidable(
         endActionPane: ActionPane(
           extentRatio: ratio,
           motion: const ScrollMotion(),
-          children: [
-            SlidableAction(
-              onPressed: (context) async {
-                final result = await confirm(
-                  context,
-                  title: Text('要刪除 ${songItem.title} ？'),
-                  content: Container(),
-                  actionOKText: '確定',
-                  actionCancelText: '取消',
-                );
-                if (result) {
-                  ref.read(playerScreenProvider().notifier).removeSong(
-                        songItem,
+          children: editMode.value
+              ? []
+              : [
+                  SlidableAction(
+                    onPressed: (context) async {
+                      final result = await confirm(
+                        context,
+                        title: Text('要刪除 ${songItem.title} ？'),
+                        content: Container(),
+                        actionOKText: '確定',
+                        actionCancelText: '取消',
                       );
-                }
-              },
-              backgroundColor: AppColor.newYorkPink.value,
-              foregroundColor: Colors.white,
-              icon: Icons.delete,
-            ),
-            SlidableAction(
-              onPressed: (context) {},
-              backgroundColor: AppColor.riptide.value,
-              foregroundColor: Colors.white,
-              icon: Icons.edit,
-            ),
-          ],
+                      if (result) {
+                        ref.read(playerScreenProvider().notifier).removeSong(
+                              songItem,
+                            );
+                      }
+                    },
+                    backgroundColor: AppColor.newYorkPink.value,
+                    foregroundColor: Colors.white,
+                    icon: Icons.delete,
+                  ),
+                  SlidableAction(
+                    onPressed: (context) {
+                      editMode.value = true;
+                    },
+                    backgroundColor: AppColor.riptide.value,
+                    foregroundColor: Colors.white,
+                    icon: Icons.edit,
+                  ),
+                ],
         ),
 
         // The child of the Slidable is what the user sees when the
@@ -67,21 +75,73 @@ class SongTile extends HookConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        songItem.title,
-                        style: const TextStyle(fontSize: 24),
+                      editMode.value
+                          ? TextField(
+                              decoration: const InputDecoration(
+                                border: InputBorder.none,
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.always,
+                                contentPadding: EdgeInsets.zero,
+                                isDense: true,
+                              ),
+                              controller: textEditingController,
+                              textInputAction: TextInputAction.done,
+                              autocorrect: false,
+                              keyboardType: TextInputType.name,
+                              minLines: 1,
+                            )
+                          : Text(
+                              songItem.title,
+                              style: const TextStyle(fontSize: 24),
+                            ),
+                      Visibility(
+                        visible: editMode.value == false,
+                        child: Text('播放次數：${songItem.count}'),
                       ),
-                      Text('播放次數：${songItem.count}'),
                     ],
                   ),
                 ),
-                Icon(
-                  isPlay ? Icons.pause : Icons.play_arrow,
-                )
+                editMode.value
+                    ? Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              ref
+                                  .read(PlayerScreenProvider().notifier)
+                                  .updateSongItem(
+                                    songItem.copyWith(
+                                      title: textEditingController.text,
+                                    ),
+                                  );
+
+                              editMode.value = false;
+                            },
+                            color: AppColor.riptide.value,
+                            icon: const Icon(
+                              Icons.check_circle,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              editMode.value = false;
+                            },
+                            color: AppColor.newYorkPink.value,
+                            icon: const Icon(
+                              Icons.cancel,
+                            ),
+                          ),
+                        ],
+                      )
+                    : Icon(
+                        isPlay ? Icons.pause : Icons.play_arrow,
+                      )
               ],
             ),
           ),
           onTap: () {
+            if (editMode.value) {
+              return;
+            }
             ref.read(playerScreenProvider().notifier).play(
                   songItem,
                 );
