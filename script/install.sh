@@ -1,6 +1,7 @@
 fvm flutter pub add  \
 audio_video_progress_bar \
 file_picker_pro \
+flutter_file_downloader \
 flutter_hooks \
 flutter_slidable \
 flutter_svg \
@@ -14,6 +15,7 @@ just_audio \
 just_audio_background \
 riverpod_annotation \
 skeletonizer \
+youtube_explode_dart \
 dev:build_runner \
 dev:custom_lint \
 dev:freezed \

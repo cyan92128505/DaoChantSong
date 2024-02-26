@@ -118,7 +118,7 @@ class SongTile extends HookConsumerWidget {
                             },
                             color: AppColor.riptide.value,
                             icon: const Icon(
-                              Icons.check_circle,
+                              Icons.check,
                             ),
                           ),
                           IconButton(
@@ -127,7 +127,7 @@ class SongTile extends HookConsumerWidget {
                             },
                             color: AppColor.newYorkPink.value,
                             icon: const Icon(
-                              Icons.cancel,
+                              Icons.close,
                             ),
                           ),
                         ],
