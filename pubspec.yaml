@@ -53,6 +53,7 @@ dependencies:
   flutter_file_downloader: ^1.2.1
   youtube_explode_dart: ^2.1.0
   path_provider: ^2.1.2
+  http: ^1.2.1
  
 dev_dependencies:
   flutter_test:

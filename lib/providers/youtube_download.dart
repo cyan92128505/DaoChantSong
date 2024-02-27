@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dao/models/remote_song.dart';
 import 'package:dao/models/song.dart';
 import 'package:dao/providers/player_screen.dart';
+import 'package:dao/repositories/remote_song_repository.dart';
 import 'package:dao/services/song_hive_service.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -19,17 +20,10 @@ class DownloadList extends _$DownloadList {
 
   setup() async {
     final list = (await SongHiveService().getSongList()).map((e) => e.id);
+    final testData = await RemoteSongRepository.getTestData();
 
-    state = [
-      RemoteSong(id: 'pwAVCWt494M', title: '鬧廳-天官賜福'),
-      RemoteSong(id: 'nl-YTnC7wVc', title: '天官賜福36分版'),
-      RemoteSong(id: 'puItFgHXjlo', title: '天官賜福24分版'),
-      RemoteSong(id: '0K5viR5FKGM', title: '天官賜福'),
-      RemoteSong(id: 'UFCfiVFzqMM', title: '辦仙'),
-      RemoteSong(id: 'c-HBnuZfEtU', title: '法仔鼓'),
-      RemoteSong(id: 'R_5lEtINufE', title: '天上聖母經'),
-      RemoteSong(id: 'UwN3SqfjbvQ', title: '天上聖母經（新版）'),
-    ].where((element) => list.contains(element) == false).toList();
+    state =
+        testData.where((element) => list.contains(element) == false).toList();
   }
 
   Future<void> downloadAll() async {

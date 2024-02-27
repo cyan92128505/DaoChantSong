@@ -10,6 +10,7 @@ go_router_plus \
 hive \
 hive_flutter \
 hooks_riverpod \
+http \
 json_annotation \
 just_audio \
 just_audio_background \
