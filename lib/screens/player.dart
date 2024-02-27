@@ -19,7 +19,10 @@ class Player extends Screen {
             onPressed: () {
               context.push(Setting().routePath);
             },
-            icon: const Icon(Icons.settings),
+            icon: const Icon(
+              Icons.settings,
+              size: kTextTabBarHeight,
+            ),
           )
         ],
       ),

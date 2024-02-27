@@ -16,13 +16,16 @@ class Playlist extends HookConsumerWidget {
           child: viewModel.songs.isNotEmpty
               ? Padding(
                   padding: const EdgeInsets.only(top: 24),
-                  child: ListView.builder(
+                  child: ReorderableListView.builder(
                     itemCount: viewModel.songs.length,
                     itemBuilder: (context, index) => SongTile(
+                      key: Key(viewModel.songs[index].id),
                       isPlay: viewModel.currentSongItem?.id ==
                           viewModel.songs[index].id,
                       songItem: viewModel.songs[index],
                     ),
+                    onReorder:
+                        ref.read(playerScreenProvider().notifier).onReorder,
                   ),
                 )
               : const EmptyItem(),

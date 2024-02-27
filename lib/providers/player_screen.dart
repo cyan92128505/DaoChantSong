@@ -92,6 +92,9 @@ class PlayerScreen extends _$PlayerScreen {
     bool initial = false,
   }) async {
     final list = await _service.getSongList();
+
+    list.sort(((a, b) => a.sort.compareTo(b.sort)));
+
     var viewModel = _viewModel.copyWith(
       songs: list,
     );
@@ -205,6 +208,23 @@ class PlayerScreen extends _$PlayerScreen {
 
   void seek(Duration position) {
     ref.read(appAudioPlayerProvider).seek(position);
+  }
+
+  Future<void> onReorder(int oldIndex, int newIndex) async {
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+    var songs = _viewModel.songs.toList();
+
+    final item = songs.removeAt(oldIndex);
+    songs.insert(newIndex, item);
+
+    for (var i = 0; i < songs.length; i++) {
+      songs[i] = songs[i].copyWith(sort: i);
+      _service.updateSong(songs[i]);
+    }
+
+    state = AsyncData(_viewModel.copyWith(songs: songs));
   }
 
   void _listenForChangesInPlayerState() {
