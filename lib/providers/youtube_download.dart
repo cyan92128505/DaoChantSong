@@ -1,8 +1,9 @@
 import 'dart:io';
 
+import 'package:dao/models/remote_song.dart';
 import 'package:dao/models/song.dart';
+import 'package:dao/providers/player_screen.dart';
 import 'package:dao/services/song_hive_service.dart';
-import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
@@ -12,7 +13,7 @@ part 'youtube_download.g.dart';
 @riverpod
 class DownloadList extends _$DownloadList {
   @override
-  List<String> build() {
+  List<RemoteSong> build() {
     return [];
   }
 
@@ -20,25 +21,41 @@ class DownloadList extends _$DownloadList {
     final list = (await SongHiveService().getSongList()).map((e) => e.id);
 
     state = [
-      'pwAVCWt494M',
-      'nl-YTnC7wVc',
-      'puItFgHXjlo',
-      '0K5viR5FKGM',
-      'UFCfiVFzqMM',
-      'c-HBnuZfEtU',
-      'R_5lEtINufE',
-      'UwN3SqfjbvQ'
+      RemoteSong(id: 'pwAVCWt494M', title: '鬧廳-天官賜福'),
+      RemoteSong(id: 'nl-YTnC7wVc', title: '天官賜福36分版'),
+      RemoteSong(id: 'puItFgHXjlo', title: '天官賜福24分版'),
+      RemoteSong(id: '0K5viR5FKGM', title: '天官賜福'),
+      RemoteSong(id: 'UFCfiVFzqMM', title: '辦仙'),
+      RemoteSong(id: 'c-HBnuZfEtU', title: '法仔鼓'),
+      RemoteSong(id: 'R_5lEtINufE', title: '天上聖母經'),
+      RemoteSong(id: 'UwN3SqfjbvQ', title: '天上聖母經（新版）'),
     ].where((element) => list.contains(element) == false).toList();
   }
 
-  download(String id) async {
+  Future<void> downloadAll() async {
+    for (var remoteSong in state) {
+      download(remoteSong.id);
+    }
+  }
+
+  Future<void> download(String id) async {
+    ref.read(youtubeDonwloadProvider.notifier).download(id);
+  }
+
+  setupProcess(String id, double process) {
     final list = state.map((e) => e).toList();
 
-    list.remove(id);
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].id == id) {
+        list[i] = list[i].copyWith(
+          processNow: process != RemoteSong.maxProcess,
+          process: process,
+        );
+        break;
+      }
+    }
 
     state = list;
-
-    ref.read(youtubeDonwloadProvider.notifier).download(id);
   }
 }
 
@@ -85,31 +102,34 @@ class YoutubeDonwload extends _$YoutubeDonwload {
     final len = audio.size.totalBytes;
     var count = 0;
 
-    // Create the message and set the cursor position.
-    final msg = 'Downloading ${video.title}.${audio.container.name}';
-    debugPrint(msg);
-
     // Listen for data received.
     await for (final data in audioStream) {
       // Keep track of the current downloaded data.
       count += data.length;
 
       // Calculate the current progress.
-      final progress = ((count / len) * 100).ceil();
+      final process = ((count / len) * RemoteSong.maxProcess).ceil();
 
-      debugPrint(progress.toStringAsFixed(2));
+      ref
+          .read(downloadListProvider.notifier)
+          .setupProcess(id, process.toDouble());
 
       // Write to file.
       output.add(data);
     }
+
+    ref
+        .read(downloadListProvider.notifier)
+        .setupProcess(id, RemoteSong.maxProcess);
+
     await output.close();
 
-    SongHiveService().addSong(
-      SongItem(
-        id: id,
-        filePath: file.path,
-        title: fileName,
-      ),
-    );
+    ref.read(playerScreenProvider().notifier).addSongFromSongItem(
+          SongItem(
+            id: id,
+            filePath: file.path,
+            title: fileName,
+          ),
+        );
   }
 }

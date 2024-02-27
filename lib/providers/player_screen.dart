@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dao/models/song.dart';
 import 'package:dao/providers/audio_player.dart';
 import 'package:dao/repositories/song_hive_repository.dart';
@@ -112,6 +114,13 @@ class PlayerScreen extends _$PlayerScreen {
     getPlayList();
   }
 
+  void addSongFromSongItem(SongItem songItem) {
+    _service.addSong(
+      songItem,
+    );
+    getPlayList();
+  }
+
   void removeSong(SongItem songItem) {
     if (_viewModel.currentSongItem?.id == songItem.id) {
       state = AsyncData(_viewModel.clean());
@@ -119,6 +128,22 @@ class PlayerScreen extends _$PlayerScreen {
       ref.read(appAudioPlayerProvider).pause();
     }
     _service.removeSong(songItem);
+    getPlayList();
+  }
+
+  Future<void> removeAllSong() async {
+    if (_viewModel.currentSongItem != null) {
+      state = AsyncData(_viewModel.clean());
+
+      ref.read(appAudioPlayerProvider).pause();
+    }
+
+    await Future.wait(
+      _viewModel.songs.where((element) => element.id.length > 6).map(
+            (songItem) => _service.removeSong(songItem),
+          ),
+    );
+
     getPlayList();
   }
 

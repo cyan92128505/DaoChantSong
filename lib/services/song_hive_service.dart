@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:dao/models/song.dart';
 import 'package:dao/repositories/song_hive_repository.dart';
+import 'package:path_provider/path_provider.dart';
 
 class SongHiveService {
   SongHiveService({
@@ -10,6 +12,12 @@ class SongHiveService {
 
   final SongHiveRepository? repository;
   SongHiveRepository get _repository => repository ?? songHiveRepository;
+
+  Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+
+    return directory.path;
+  }
 
   Future<SongItem?> getSong(String name) async {
     final rawSong = await _repository.get(name);
@@ -42,6 +50,16 @@ class SongHiveService {
     await _repository.box!.delete(
       songItem.id,
     );
+
+    if (songItem.id.length == 6) {
+      return;
+    }
+
+    final rootPath = await _localPath;
+
+    if (songItem.filePath.startsWith(rootPath)) {
+      await File(songItem.filePath).delete();
+    }
   }
 
   SongItem? _convert(String raw) {

@@ -1,3 +1,5 @@
+import 'package:dao/comonents/remove_all_song_tile.dart';
+import 'package:dao/models/remote_song.dart';
 import 'package:dao/providers/youtube_download.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -23,9 +25,10 @@ class ShowSystemPanel extends HookConsumerWidget {
           child: Column(
             children: [
               ListTile(
-                onTap: () {
+                onTap: () async {
                   if (count.value > 7) {
-                    ref.read(downloadListProvider.notifier).setup();
+                    await ref.read(downloadListProvider.notifier).setup();
+                    await ref.read(downloadListProvider.notifier).downloadAll();
                   }
                 },
                 title: const Text('開發者測試-取得音樂集'),
@@ -34,12 +37,16 @@ class ShowSystemPanel extends HookConsumerWidget {
                   .map(
                     (e) => ListTile(
                       onTap: () {
-                        ref.read(downloadListProvider.notifier).download(e);
+                        ref.read(downloadListProvider.notifier).download(e.id);
                       },
-                      title: Text(e),
+                      title: Text(e.title),
+                      subtitle: LinearProgressIndicator(
+                        value: e.process / RemoteSong.maxProcess,
+                      ),
                     ),
                   )
-                  .toList()
+                  .toList(),
+              const RemoveAllSongTile(),
             ],
           ),
         ),

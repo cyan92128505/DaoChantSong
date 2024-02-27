@@ -12,6 +12,7 @@ class SongItem with _$SongItem {
   const factory SongItem({
     @Default('') @JsonKey(name: 'id') String id,
     @Default('') @JsonKey(name: 'title') String title,
+    @Default(false) @JsonKey(name: 'download') bool download,
     @Default('') @JsonKey(name: 'filePath') String filePath,
     @Default(null) @JsonKey(name: 'created_at') DateTime? createdAt,
     @Default(null) @JsonKey(name: 'updated_at') DateTime? updatedAt,
