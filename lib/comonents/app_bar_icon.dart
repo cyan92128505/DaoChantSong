@@ -9,7 +9,7 @@ class AppBarIcon extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SvgPicture.string(
-      titleSvg,
+      titleSvg(),
       width: 100,
       colorFilter: ColorFilter.mode(
         AppColor.newYorkPink.value,

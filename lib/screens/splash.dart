@@ -2,6 +2,7 @@ import 'package:dao/assets/logo_svg.dart';
 import 'package:dao/configs/theme.dart';
 import 'package:dao/hooks/use_screen_size.dart';
 import 'package:dao/screens/player.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
@@ -27,7 +28,7 @@ class _SplashScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = useScreenSize();
-    final toggle = useState(false);
+    final toggle = useState(kDebugMode);
 
     useEffect(() {
       Future.delayed(const Duration(milliseconds: 777)).then((_) {
@@ -40,6 +41,7 @@ class _SplashScreen extends HookConsumerWidget {
     }, []);
 
     return Scaffold(
+      backgroundColor: AppColor.newYorkPink.value,
       body: Column(
         children: [
           Expanded(
@@ -52,12 +54,8 @@ class _SplashScreen extends HookConsumerWidget {
                   GoRouter.of(context).go(Player().routePath);
                 },
                 child: SvgPicture.string(
-                  logoSvg,
+                  logoSvg(mainColor: AppColor.pure.value),
                   width: size.width / 3,
-                  colorFilter: ColorFilter.mode(
-                    AppColor.newYorkPink.value,
-                    BlendMode.modulate,
-                  ),
                 ),
               ),
             ),
@@ -66,7 +64,7 @@ class _SplashScreen extends HookConsumerWidget {
             padding: const EdgeInsets.symmetric(vertical: 32),
             child: Center(
               child: SvgPicture.string(
-                titleSvg,
+                titleShadowSvg,
                 width: size.width / 3,
               ),
             ),

@@ -1,8 +1,11 @@
 import 'package:dao/comonents/remove_all_song_tile.dart';
 import 'package:dao/models/remote_song.dart';
 import 'package:dao/providers/youtube_download.dart';
+import 'package:dao/screens/splash.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router_plus/go_router_plus.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ShowSystemPanel extends HookConsumerWidget {
@@ -20,6 +23,14 @@ class ShowSystemPanel extends HookConsumerWidget {
             count.value = count.value + 1;
           },
         ),
+        Visibility(
+            visible: kDebugMode,
+            child: ListTile(
+              title: const Text('GoTo Splash'),
+              onTap: () {
+                context.go(Splash().routePath);
+              },
+            )),
         Visibility(
           visible: count.value > 7,
           child: Column(

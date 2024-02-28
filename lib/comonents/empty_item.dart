@@ -30,7 +30,7 @@ class EmptyItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SvgPicture.string(
-              logoSvg,
+              logoSvg(),
               width: 80,
               colorFilter: ColorFilter.mode(
                 AppColor.pure.value,

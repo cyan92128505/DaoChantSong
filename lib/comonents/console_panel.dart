@@ -12,26 +12,29 @@ class ConsolePanel extends HookConsumerWidget {
   const ConsolePanel({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: const Offset(0, 3), // changes position of shadow
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(16),
-      child: Stack(
-        children: [
-          Center(
-            child:
-                DataSourceWrap(ref.watch(playerScreenProvider()), (viewModel) {
-              return SvgPicture.string(
-                logoSvg,
+    return DataSourceWrap(ref.watch(playerScreenProvider()), (viewModel) {
+      if (viewModel.songs.isEmpty) {
+        return Container();
+      }
+
+      return Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: const Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
+        padding: const EdgeInsets.all(16),
+        child: Stack(
+          children: [
+            Center(
+              child: SvgPicture.string(
+                logoSvg(),
                 width: 64,
                 colorFilter: ColorFilter.mode(
                   viewModel.currentSongItem == null
@@ -39,17 +42,17 @@ class ConsolePanel extends HookConsumerWidget {
                       : AppColor.newYorkPink.value.withAlpha(16),
                   BlendMode.modulate,
                 ),
-              );
-            }),
-          ),
-          const Column(
-            children: [
-              CurrentSongTitle(),
-              AudioProgressBar(),
-            ],
-          )
-        ],
-      ),
-    );
+              ),
+            ),
+            const Column(
+              children: [
+                CurrentSongTitle(),
+                AudioProgressBar(),
+              ],
+            )
+          ],
+        ),
+      );
+    });
   }
 }
