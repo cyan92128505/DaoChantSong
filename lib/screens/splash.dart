@@ -27,9 +27,13 @@ class _SplashScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = useScreenSize();
+    final toggle = useState(false);
 
     useEffect(() {
       Future.delayed(const Duration(milliseconds: 777)).then((_) {
+        if (toggle.value) {
+          return;
+        }
         GoRouter.of(context).go(Player().routePath);
       });
       return null;
@@ -40,12 +44,20 @@ class _SplashScreen extends HookConsumerWidget {
         children: [
           Expanded(
             child: Center(
-              child: SvgPicture.string(
-                logoSvg,
-                width: size.width / 3,
-                colorFilter: ColorFilter.mode(
-                  AppColor.newYorkPink.value,
-                  BlendMode.modulate,
+              child: GestureDetector(
+                onDoubleTap: () {
+                  toggle.value = true;
+                },
+                onTap: () {
+                  GoRouter.of(context).go(Player().routePath);
+                },
+                child: SvgPicture.string(
+                  logoSvg,
+                  width: size.width / 3,
+                  colorFilter: ColorFilter.mode(
+                    AppColor.newYorkPink.value,
+                    BlendMode.modulate,
+                  ),
                 ),
               ),
             ),
