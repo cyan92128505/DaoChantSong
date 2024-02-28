@@ -79,7 +79,7 @@ class YoutubeDonwload extends _$YoutubeDonwload {
     final audioStream = state.videos.streamsClient.get(audio);
 
     // Compose the file name removing the unallowed characters in windows.
-    final fileName = '${video.title}.${audio.container.name}'
+    final fileName = video.title
         .replaceAll(r'\', '')
         .replaceAll('/', '')
         .replaceAll('*', '')

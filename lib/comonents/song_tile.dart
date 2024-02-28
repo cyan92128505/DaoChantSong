@@ -62,9 +62,6 @@ class SongTile extends HookConsumerWidget {
                   ),
                 ],
         ),
-
-        // The child of the Slidable is what the user sees when the
-        // component is not dragged.
         child: GestureDetector(
           child: Container(
             color: AppColor.pure.value,
@@ -142,7 +139,7 @@ class SongTile extends HookConsumerWidget {
             if (editMode.value) {
               return;
             }
-            ref.read(playerScreenProvider().notifier).play(
+            ref.read(playerScreenProvider().notifier).startPlay(
                   songItem,
                 );
           },

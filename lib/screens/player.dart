@@ -1,6 +1,6 @@
 import 'package:dao/comonents/add_song_buttons.dart';
-import 'package:dao/comonents/audio_progress_bar.dart';
-import 'package:dao/comonents/current_song_title.dart';
+import 'package:dao/comonents/app_bar_icon.dart';
+import 'package:dao/comonents/console_panel.dart';
 import 'package:dao/comonents/play_list.dart';
 import 'package:dao/screens/setting.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,7 @@ class Player extends Screen {
       appBar: AppBar(
         backgroundColor: Colors.white,
         centerTitle: true,
-        title: const CurrentSongTitle(),
+        title: const AppBarIcon(),
         actions: [
           IconButton(
             onPressed: () {
@@ -26,28 +26,10 @@ class Player extends Screen {
           )
         ],
       ),
-      body: Column(
+      body: const Column(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 5,
-                  blurRadius: 7,
-                  offset: const Offset(0, 3), // changes position of shadow
-                ),
-              ],
-            ),
-            padding: const EdgeInsets.all(16),
-            child: const Column(
-              children: [
-                AudioProgressBar(),
-              ],
-            ),
-          ),
-          const Playlist(),
+          ConsolePanel(),
+          Playlist(),
         ],
       ),
       floatingActionButton: const AddSongButton(),

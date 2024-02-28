@@ -150,7 +150,7 @@ class PlayerScreen extends _$PlayerScreen {
     getPlayList();
   }
 
-  void play(SongItem songItem) async {
+  void startPlay(SongItem songItem) async {
     try {
       if (_viewModel.currentSongItem?.id == songItem.id &&
           _viewModel.playerState != PlayerState.paused) {
@@ -200,6 +200,10 @@ class PlayerScreen extends _$PlayerScreen {
     }).toList();
 
     state = AsyncData(_viewModel.copyWith(songs: songs));
+  }
+
+  void play() {
+    ref.read(appAudioPlayerProvider).play();
   }
 
   void pause() {

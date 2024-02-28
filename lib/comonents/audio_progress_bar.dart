@@ -11,15 +11,22 @@ class AudioProgressBar extends HookConsumerWidget {
     return DataSourceWrap(
       ref.watch(playerScreenProvider()),
       (viewModel) {
-        if (viewModel.currentSongItem == null) {
-          return Container();
-        }
-
-        return ProgressBar(
-          progress: viewModel.progressBarState.current,
-          buffered: viewModel.progressBarState.buffered,
-          total: viewModel.progressBarState.total,
-          onSeek: ref.read(playerScreenProvider().notifier).seek,
+        return Stack(
+          children: [
+            const SizedBox(
+              height: kTextTabBarHeight,
+              width: double.maxFinite,
+            ),
+            Visibility(
+              visible: viewModel.currentSongItem != null,
+              child: ProgressBar(
+                progress: viewModel.progressBarState.current,
+                buffered: viewModel.progressBarState.buffered,
+                total: viewModel.progressBarState.total,
+                onSeek: ref.read(playerScreenProvider().notifier).seek,
+              ),
+            ),
+          ],
         );
       },
     );

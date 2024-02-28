@@ -24,6 +24,10 @@ class Playlist extends HookConsumerWidget {
                           viewModel.songs[index].id,
                       songItem: viewModel.songs[index],
                     ),
+                    footer: const SizedBox(
+                      height: 128,
+                      width: double.maxFinite,
+                    ),
                     onReorder:
                         ref.read(playerScreenProvider().notifier).onReorder,
                   ),
