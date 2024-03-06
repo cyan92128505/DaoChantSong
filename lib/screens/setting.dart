@@ -1,8 +1,18 @@
 import 'package:dao/comonents/show_system_panel.dart';
+import 'package:dao/models/route_config.dart';
+import 'package:dao/screens/onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router_plus/go_router_plus.dart';
 
-class Setting extends Screen {
+class SettingScreen extends Screen {
+  static const RouteConfig route = RouteConfig('setting', '/setting');
+
+  @override
+  String get routeName => route.name;
+
+  @override
+  String get routePath => route.path;
+
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return Scaffold(
@@ -16,8 +26,14 @@ class Setting extends Screen {
         children: [
           Expanded(
             child: ListView(
-              children: const [
-                ShowSystemPanel(),
+              children: [
+                ListTile(
+                  title: const Text('載入音樂教學'),
+                  onTap: () {
+                    context.push(OnboardingScreen.route.path);
+                  },
+                ),
+                const ShowSystemPanel(),
               ],
             ),
           ),
@@ -25,10 +41,4 @@ class Setting extends Screen {
       ),
     );
   }
-
-  @override
-  String get routeName => 'setting';
-
-  @override
-  String get routePath => '/setting';
 }

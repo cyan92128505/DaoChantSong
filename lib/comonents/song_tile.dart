@@ -1,4 +1,4 @@
-import 'package:dao/assets/logo_svg.dart';
+import 'package:dao/assets/svg.dart';
 import 'package:dao/comonents/confirm_dialog.dart';
 import 'package:dao/configs/theme.dart';
 import 'package:dao/hooks/use_screen_size.dart';

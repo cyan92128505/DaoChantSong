@@ -7,8 +7,8 @@ import 'package:dao/screens/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router_plus/go_router_plus.dart';
 
-class PlayerScreen extends Screen {
-  static const RouteConfig route = RouteConfig('player', '/player');
+class ShowCaseScreen extends Screen {
+  static const RouteConfig route = RouteConfig('show_case', '/show_case');
 
   @override
   String get routeName => route.name;
@@ -26,7 +26,7 @@ class PlayerScreen extends Screen {
         actions: [
           IconButton(
             onPressed: () {
-              context.push(SettingScreen.route.path);
+              context.push(SettingScreen().routePath);
             },
             icon: const Icon(
               Icons.settings,

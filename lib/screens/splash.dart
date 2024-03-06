@@ -1,6 +1,7 @@
-import 'package:dao/assets/logo_svg.dart';
+import 'package:dao/assets/svg.dart';
 import 'package:dao/configs/theme.dart';
 import 'package:dao/hooks/use_screen_size.dart';
+import 'package:dao/models/route_config.dart';
 import 'package:dao/screens/player.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,17 +10,19 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router_plus/go_router_plus.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class Splash extends Screen {
+class SplashScreen extends Screen {
+  static const RouteConfig route = RouteConfig('splash', '/');
+
+  @override
+  String get routeName => route.name;
+
+  @override
+  String get routePath => route.path;
+
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const _SplashScreen();
   }
-
-  @override
-  String get routeName => 'splash';
-
-  @override
-  String get routePath => '/';
 }
 
 class _SplashScreen extends HookConsumerWidget {
@@ -35,7 +38,7 @@ class _SplashScreen extends HookConsumerWidget {
         if (toggle.value) {
           return;
         }
-        GoRouter.of(context).go(Player().routePath);
+        GoRouter.of(context).go(PlayerScreen.route.path);
       });
       return null;
     }, []);
@@ -51,7 +54,7 @@ class _SplashScreen extends HookConsumerWidget {
                   toggle.value = true;
                 },
                 onTap: () {
-                  GoRouter.of(context).go(Player().routePath);
+                  GoRouter.of(context).go(PlayerScreen().routePath);
                 },
                 child: SvgPicture.string(
                   logoSvg(mainColor: AppColor.pure.value),

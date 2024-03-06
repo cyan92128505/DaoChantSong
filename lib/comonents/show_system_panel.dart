@@ -24,13 +24,14 @@ class ShowSystemPanel extends HookConsumerWidget {
           },
         ),
         Visibility(
-            visible: kDebugMode,
-            child: ListTile(
-              title: const Text('GoTo Splash'),
-              onTap: () {
-                context.go(Splash().routePath);
-              },
-            )),
+          visible: kDebugMode,
+          child: ListTile(
+            title: const Text('GoTo Splash'),
+            onTap: () {
+              context.go(SplashScreen.route.path);
+            },
+          ),
+        ),
         Visibility(
           visible: count.value > 7,
           child: Column(

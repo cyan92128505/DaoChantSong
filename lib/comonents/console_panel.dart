@@ -1,4 +1,4 @@
-import 'package:dao/assets/logo_svg.dart';
+import 'package:dao/assets/svg.dart';
 import 'package:dao/comonents/audio_progress_bar.dart';
 import 'package:dao/comonents/current_song_title.dart';
 import 'package:dao/comonents/data_source_wrap.dart';

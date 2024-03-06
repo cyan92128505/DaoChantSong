@@ -1,4 +1,4 @@
-import 'package:dao/assets/logo_svg.dart';
+import 'package:dao/assets/svg.dart';
 import 'package:dao/configs/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
