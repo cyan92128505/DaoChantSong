@@ -28,7 +28,7 @@ class SettingScreen extends Screen {
             child: ListView(
               children: [
                 ListTile(
-                  title: const Text('載入音樂教學'),
+                  title: const Text('整合經典教學'),
                   onTap: () {
                     context.push(OnboardingScreen.route.path);
                   },
