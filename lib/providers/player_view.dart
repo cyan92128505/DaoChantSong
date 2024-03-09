@@ -12,8 +12,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'player_screen.g.dart';
-part 'player_screen.freezed.dart';
+part 'player_view.g.dart';
+part 'player_view.freezed.dart';
 
 enum PlayerState {
   paused,
@@ -59,7 +59,7 @@ class PlayerViewModel with _$PlayerViewModel {
 }
 
 @riverpod
-class PlayerScreen extends _$PlayerScreen {
+class PlayerView extends _$PlayerView {
   @override
   FutureOr<PlayerViewModel> build({
     SongHiveRepository? repository,

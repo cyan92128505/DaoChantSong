@@ -1,4 +1,4 @@
-import 'package:dao/providers/player_screen.dart';
+import 'package:dao/providers/player_view.dart';
 import 'package:dao/providers/youtube_download.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -16,7 +16,7 @@ class RemoveAllSongTile extends HookConsumerWidget {
           return;
         }
         touched.value = true;
-        await ref.read(playerScreenProvider().notifier).removeAllSong();
+        await ref.read(playerViewProvider().notifier).removeAllSong();
         ref.read(downloadListProvider.notifier).setup();
         touched.value = false;
       },

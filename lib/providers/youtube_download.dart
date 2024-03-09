@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dao/models/remote_song.dart';
 import 'package:dao/models/song.dart';
-import 'package:dao/providers/player_screen.dart';
+import 'package:dao/providers/player_view.dart';
 import 'package:dao/repositories/remote_song_repository.dart';
 import 'package:dao/services/song_hive_service.dart';
 import 'package:path_provider/path_provider.dart';
@@ -118,7 +118,7 @@ class YoutubeDonwload extends _$YoutubeDonwload {
 
     await output.close();
 
-    ref.read(playerScreenProvider().notifier).addSongFromSongItem(
+    ref.read(playerViewProvider().notifier).addSongFromSongItem(
           SongItem(
             id: id,
             filePath: file.path,

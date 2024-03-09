@@ -3,7 +3,7 @@ import 'package:dao/comonents/audio_progress_bar.dart';
 import 'package:dao/comonents/current_song_title.dart';
 import 'package:dao/comonents/data_source_wrap.dart';
 import 'package:dao/configs/theme.dart';
-import 'package:dao/providers/player_screen.dart';
+import 'package:dao/providers/player_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -12,7 +12,7 @@ class ConsolePanel extends HookConsumerWidget {
   const ConsolePanel({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return DataSourceWrap(ref.watch(playerScreenProvider()), (viewModel) {
+    return DataSourceWrap(ref.watch(playerViewProvider()), (viewModel) {
       if (viewModel.songs.isEmpty) {
         return Container();
       }

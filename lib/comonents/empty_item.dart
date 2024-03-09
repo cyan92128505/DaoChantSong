@@ -43,7 +43,7 @@ class EmptyItem extends StatelessWidget {
             Text(
               title ?? '目前沒有任何歌曲',
               style: TextStyle(
-                color: AppColor.pure.value,
+                color: AppColor.gray.value,
                 fontWeight: FontWeight.w500,
               ),
             ),

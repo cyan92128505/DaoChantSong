@@ -9,7 +9,8 @@ enum AppColor {
   cream(Color(0xFFF8FFD2)),
   sulu(Color(0xFFD0F288)),
   riptide(Color(0xFF8ADAB2)),
-  pure(Color(0xFFF2EDD7));
+  pure(Color(0xFFF2EDD7)),
+  gray(Color(0xFFD2D2D2));
 
   const AppColor(this.value);
 

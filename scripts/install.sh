@@ -15,6 +15,7 @@ json_annotation \
 just_audio \
 just_audio_background \
 riverpod_annotation \
+shared_preferences \
 skeletonizer \
 youtube_explode_dart \
 dev:build_runner \

@@ -1,5 +1,5 @@
 import 'package:dao/comonents/data_source_wrap.dart';
-import 'package:dao/providers/player_screen.dart';
+import 'package:dao/providers/player_view.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -8,7 +8,7 @@ class CurrentSongTitle extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return DataSourceWrap(
-      ref.watch(playerScreenProvider()),
+      ref.watch(playerViewProvider()),
       (viewModel) {
         return SizedBox(
           height: 64,
@@ -30,8 +30,8 @@ class CurrentSongTitle extends HookConsumerWidget {
                   iconSize: 32,
                   onPressed: () {
                     viewModel.playerState == PlayerState.playing
-                        ? ref.read(playerScreenProvider().notifier).pause()
-                        : ref.read(playerScreenProvider().notifier).play();
+                        ? ref.read(playerViewProvider().notifier).pause()
+                        : ref.read(playerViewProvider().notifier).play();
                   },
                   icon: Icon(
                     viewModel.playerState == PlayerState.playing

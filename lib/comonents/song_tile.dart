@@ -3,7 +3,7 @@ import 'package:dao/comonents/confirm_dialog.dart';
 import 'package:dao/configs/theme.dart';
 import 'package:dao/hooks/use_screen_size.dart';
 import 'package:dao/models/song.dart';
-import 'package:dao/providers/player_screen.dart';
+import 'package:dao/providers/player_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -45,7 +45,7 @@ class SongTile extends HookConsumerWidget {
                         actionCancelText: '取消',
                       );
                       if (result) {
-                        ref.read(playerScreenProvider().notifier).removeSong(
+                        ref.read(playerViewProvider().notifier).removeSong(
                               songItem,
                             );
                       }
@@ -106,7 +106,7 @@ class SongTile extends HookConsumerWidget {
                           IconButton(
                             onPressed: () {
                               ref
-                                  .read(PlayerScreenProvider().notifier)
+                                  .read(playerViewProvider().notifier)
                                   .updateSongItem(
                                     songItem.copyWith(
                                       title: textEditingController.text,
@@ -149,7 +149,7 @@ class SongTile extends HookConsumerWidget {
             if (editMode.value) {
               return;
             }
-            ref.read(playerScreenProvider().notifier).startPlay(
+            ref.read(playerViewProvider().notifier).startPlay(
                   songItem,
                 );
           },

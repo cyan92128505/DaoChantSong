@@ -1,6 +1,7 @@
 import 'package:dao/comonents/onboarding_page.dart';
 import 'package:dao/configs/theme.dart';
 import 'package:dao/models/route_config.dart';
+import 'package:dao/providers/local_storage/first_open_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router_plus/go_router_plus.dart';
@@ -28,10 +29,11 @@ class _OnboardingView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final index = useState(0.0);
     final controller = usePageController();
+    final firstOpenApp = ref.read(firstOpenAppProvider);
 
     return Scaffold(
       appBar: AppBar(
-        leading: const BackButton(),
+        leading: firstOpenApp ? Container() : const BackButton(),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),

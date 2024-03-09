@@ -1,5 +1,5 @@
 import 'package:dao/configs/theme.dart';
-import 'package:dao/providers/player_screen.dart';
+import 'package:dao/providers/player_view.dart';
 import 'package:file_picker_pro/file_data.dart';
 import 'package:file_picker_pro/files.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +30,7 @@ class AddSongButton extends HookConsumerWidget {
           ],
           onSelected: (fileData) {
             currentFileData.value = fileData;
-            ref.read(playerScreenProvider().notifier).addSong(fileData);
+            ref.read(playerViewProvider().notifier).addSong(fileData);
           },
           onCancel: (message, messageCode) {},
         );

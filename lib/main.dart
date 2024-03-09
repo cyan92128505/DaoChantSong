@@ -1,5 +1,6 @@
 import 'package:dao/configs/theme.dart';
 import 'package:dao/repositories/hive_repository.dart';
+import 'package:dao/repositories/local_storage/local_storage.dart';
 import 'package:dao/repositories/song_hive_repository.dart';
 import 'package:dao/screens/onboarding.dart';
 import 'package:dao/screens/player.dart';
@@ -18,6 +19,7 @@ void main() async {
     androidNotificationOngoing: true,
   );
 
+  await LocalStorage.initial();
   await HiveRepository.hiveInitial();
   await songHiveRepository.initial();
 

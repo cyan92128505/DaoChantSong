@@ -1,7 +1,7 @@
 import 'package:dao/comonents/data_source_wrap.dart';
 import 'package:dao/comonents/empty_item.dart';
 import 'package:dao/comonents/song_tile.dart';
-import 'package:dao/providers/player_screen.dart';
+import 'package:dao/providers/player_view.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -10,7 +10,7 @@ class Playlist extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return DataSourceWrap(
-      ref.watch(playerScreenProvider()),
+      ref.watch(playerViewProvider()),
       (viewModel) {
         return Expanded(
           child: viewModel.songs.isNotEmpty
@@ -29,7 +29,7 @@ class Playlist extends HookConsumerWidget {
                       width: double.maxFinite,
                     ),
                     onReorder:
-                        ref.read(playerScreenProvider().notifier).onReorder,
+                        ref.read(playerViewProvider().notifier).onReorder,
                   ),
                 )
               : const EmptyItem(),

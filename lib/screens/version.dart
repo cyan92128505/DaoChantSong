@@ -15,7 +15,7 @@ class VersionScreen extends Screen {
   build(BuildContext context, GoRouterState state) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(),
+        leading: const BackButton(),
       ),
       body: Container(),
     );
