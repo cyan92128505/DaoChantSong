@@ -11,7 +11,7 @@ import 'package:go_router_plus/go_router_plus.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:showcaseview/showcaseview.dart';
 
-GlobalKey _one = GlobalKey();
+GlobalKey _upload = GlobalKey();
 
 class ShowCasePage extends HookConsumerWidget {
   const ShowCasePage({super.key});
@@ -35,7 +35,7 @@ class _ShowCasePageContent extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final show = useCallback(() {
       ShowCaseWidget.of(context).startShowCase([
-        _one,
+        _upload,
       ]);
     });
 
@@ -68,7 +68,7 @@ class _ShowCasePageContent extends HookConsumerWidget {
         ],
       ),
       floatingActionButton: Showcase(
-        key: _one,
+        key: _upload,
         title: '上傳',
         description: '從這裡開始整合您的經典音樂 (mp3/mp4)',
         targetShapeBorder: const CircleBorder(),
