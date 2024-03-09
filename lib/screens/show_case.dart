@@ -1,9 +1,5 @@
-import 'package:dao/comonents/add_song_buttons.dart';
-import 'package:dao/comonents/app_bar_icon.dart';
-import 'package:dao/comonents/console_panel.dart';
-import 'package:dao/comonents/play_list.dart';
+import 'package:dao/comonents/show_case_page.dart';
 import 'package:dao/models/route_config.dart';
-import 'package:dao/screens/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router_plus/go_router_plus.dart';
 
@@ -18,30 +14,6 @@ class ShowCaseScreen extends Screen {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        title: const AppBarIcon(),
-        actions: [
-          IconButton(
-            onPressed: () {
-              context.push(SettingScreen().routePath);
-            },
-            icon: const Icon(
-              Icons.settings,
-              size: kTextTabBarHeight,
-            ),
-          )
-        ],
-      ),
-      body: const Column(
-        children: [
-          ConsolePanel(),
-          Playlist(),
-        ],
-      ),
-      floatingActionButton: const AddSongButton(),
-    );
+    return const ShowCasePage();
   }
 }

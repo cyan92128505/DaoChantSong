@@ -1,21 +1,22 @@
 import 'package:dao/assets/svg.dart';
 import 'package:dao/configs/theme.dart';
 import 'package:dao/hooks/use_screen_size.dart';
-import 'package:dao/screens/player.dart';
+import 'package:dao/screens/show_case.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router_plus/go_router_plus.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class OnboardingPage extends HookConsumerWidget {
-  const OnboardingPage(
-      {super.key,
-      required this.title,
-      required this.content,
-      required this.svgImage,
-      this.imageWidth,
-      this.padding,
-      this.showFinishButton = false});
+  const OnboardingPage({
+    super.key,
+    required this.title,
+    required this.content,
+    required this.svgImage,
+    this.imageWidth,
+    this.padding,
+    this.showFinishButton = false,
+  });
   final String title;
   final String content;
   final String svgImage;
@@ -26,47 +27,57 @@ class OnboardingPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = useScreenSize();
-    return Column(
+    return ListView(
       children: [
-        Text(
-          title,
-          style: const TextStyle(fontSize: 32),
-        ),
-        Padding(
-          padding: padding ?? EdgeInsets.zero,
-          child: SvgPicture.string(
-            svgImage,
-            width: imageWidth ?? size.width - 32,
-          ),
-        ),
-        Text(
-          content,
-          style: const TextStyle(fontSize: 24),
-        ),
-        Visibility(
-          visible: showFinishButton,
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16).copyWith(top: 64),
-            child: ElevatedButton(
-              onPressed: () {
-                context.go(PlayerScreen.route.path);
-              },
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.all(20),
-                backgroundColor: AppColor.sulu.value,
-              ),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    '開始',
-                    style: TextStyle(fontSize: 24),
-                  )
-                ],
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 24),
+              child: Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 32,
+                ),
               ),
             ),
-          ),
+            Padding(
+              padding: padding ?? EdgeInsets.zero,
+              child: SvgPicture.string(
+                svgImage,
+                width: imageWidth ?? size.width - 32,
+              ),
+            ),
+            Text(
+              content,
+              style: const TextStyle(fontSize: 24),
+            ),
+            Visibility(
+              visible: showFinishButton,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16)
+                    .copyWith(top: 64),
+                child: ElevatedButton(
+                  onPressed: () {
+                    context.go(ShowCaseScreen.route.path);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.all(20),
+                    backgroundColor: AppColor.sulu.value,
+                  ),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '開始',
+                        style: TextStyle(fontSize: 24),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     );
