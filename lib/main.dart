@@ -2,6 +2,7 @@ import 'package:dao/configs/theme.dart';
 import 'package:dao/repositories/hive_repository.dart';
 import 'package:dao/repositories/local_storage/local_storage.dart';
 import 'package:dao/repositories/song_hive_repository.dart';
+import 'package:dao/screens/copyright.dart';
 import 'package:dao/screens/onboarding.dart';
 import 'package:dao/screens/player.dart';
 import 'package:dao/screens/setting.dart';
@@ -29,6 +30,7 @@ void main() async {
       PlayerScreen(),
       SettingScreen(),
       ShowCaseScreen(),
+      CopyrightScreen(),
       OnboardingScreen(),
     ],
     refreshNotifiers: [],
