@@ -1,8 +1,13 @@
 import 'package:dao/assets/svg.dart';
+import 'package:dao/configs/env.dart';
 import 'package:dao/configs/theme.dart';
 import 'package:dao/hooks/use_screen_size.dart';
+import 'package:dao/screens/player.dart';
 import 'package:dao/screens/show_case.dart';
+import 'package:dao/utils/link.dart';
+import 'package:dao/utils/markdown.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router_plus/go_router_plus.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -48,9 +53,13 @@ class OnboardingPage extends HookConsumerWidget {
                 width: imageWidth ?? size.width - 32,
               ),
             ),
-            Text(
-              content,
-              style: const TextStyle(fontSize: 24),
+            MarkdownBody(
+              data: content,
+              extensionSet: MarkdownExtensionSet.githubFlavored.value,
+              onTapLink: (String text, String? href, String title) =>
+                  linkOnTapHandler(
+                href,
+              ),
             ),
             Visibility(
               visible: showFinishButton,
@@ -77,6 +86,15 @@ class OnboardingPage extends HookConsumerWidget {
                 ),
               ),
             ),
+            Visibility(
+              visible: showFinishButton,
+              child: TextButton(
+                onPressed: () {
+                  context.go(PlayerScreen.route.path);
+                },
+                child: const Text('略過'),
+              ),
+            ),
           ],
         ),
       ],
@@ -98,13 +116,14 @@ class OnboardingPage extends HookConsumerWidget {
   }
 
   factory OnboardingPage.second() {
-    return const OnboardingPage(
+    return OnboardingPage(
       title: '探索道教音樂的世界',
       content: '''
-點經誦提供了一個簡單、方便的方式
-讓您收集、組織和播放您最喜愛的道教歌曲
-無論您是在冥想、禱告還是放鬆時
-都可以找到適合您心靈需求的音樂''',
+點經誦 提供了一個簡單、方便的方式
+讓您收集、組織和播放您最喜愛的道教音樂
+我們將自動從「[${EnvConfig.musicSourceName}](${EnvConfig.musicSourceSiteUrl})」網站上填補您的播放清單
+讓您即刻開始聆聽道教音樂的美好
+''',
       svgImage: secondImage,
     );
   }

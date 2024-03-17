@@ -16,6 +16,7 @@ http \
 json_annotation \
 just_audio \
 just_audio_background \
+path_provider \
 riverpod_annotation \
 shared_preferences \
 showcaseview \

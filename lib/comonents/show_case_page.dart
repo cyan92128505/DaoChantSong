@@ -2,6 +2,7 @@ import 'package:dao/comonents/add_song_buttons.dart';
 import 'package:dao/comonents/app_bar_icon.dart';
 import 'package:dao/comonents/console_panel.dart';
 import 'package:dao/comonents/play_list.dart';
+import 'package:dao/providers/first_download.dart';
 import 'package:dao/providers/local_storage/first_open_app.dart';
 import 'package:dao/screens/player.dart';
 import 'package:dao/screens/setting.dart';
@@ -17,13 +18,19 @@ class ShowCasePage extends HookConsumerWidget {
   const ShowCasePage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final baseContext = useContext();
+    final gotPlayerScreen = useCallback(() async {
+      baseContext.go(PlayerScreen.route.path);
+    });
+
     return ShowCaseWidget(
       builder: Builder(
         builder: (context) => const _ShowCasePageContent(),
       ),
-      onFinish: () {
+      onFinish: () async {
         ref.read(firstOpenAppProvider.notifier).setup(false);
-        context.go(PlayerScreen.route.path);
+        await ref.read(firstDownloadProvider.future);
+        gotPlayerScreen();
       },
     );
   }
