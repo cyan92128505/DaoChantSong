@@ -24,9 +24,7 @@ class ShowCasePage extends HookConsumerWidget {
     });
 
     return ShowCaseWidget(
-      builder: Builder(
-        builder: (context) => const _ShowCasePageContent(),
-      ),
+      builder: (context) => const _ShowCasePageContent(),
       onFinish: () async {
         ref.read(firstOpenAppProvider.notifier).setup(false);
         await ref.read(firstDownloadProvider.future);
