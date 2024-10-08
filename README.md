@@ -1,4 +1,4 @@
-# DaoChantSong - Developer Documentation
+# DaoChantSong
 
 Welcome to the developer documentation for the DaoChantSong Flutter application. This document aims to help developers quickly understand the project structure, set up the development environment, and contribute code.
 
