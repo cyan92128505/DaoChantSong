@@ -19,6 +19,7 @@ just_audio_background \
 path_provider \
 riverpod_annotation \
 shared_preferences \
+share_plus \
 showcaseview \
 skeletonizer \
 url_launcher \

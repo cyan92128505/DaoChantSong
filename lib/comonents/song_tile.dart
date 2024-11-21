@@ -9,6 +9,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:share_plus/share_plus.dart';
 
 class SongTile extends HookConsumerWidget {
   const SongTile({
@@ -65,6 +66,25 @@ class SongTile extends HookConsumerWidget {
                 ],
         ),
         child: GestureDetector(
+          onTap: () {
+            if (editMode.value) {
+              return;
+            }
+            ref.read(playerViewProvider().notifier).startPlay(
+                  songItem,
+                );
+          },
+          onDoubleTap: () async {
+            if (editMode.value) {
+              return;
+            }
+
+            await Share.shareXFiles(
+              [
+                XFile(songItem.filePath),
+              ],
+            );
+          },
           child: Container(
             color: AppColor.pure.value,
             padding: const EdgeInsets.all(16),
@@ -145,14 +165,6 @@ class SongTile extends HookConsumerWidget {
               ],
             ),
           ),
-          onTap: () {
-            if (editMode.value) {
-              return;
-            }
-            ref.read(playerViewProvider().notifier).startPlay(
-                  songItem,
-                );
-          },
         ),
       ),
     );
