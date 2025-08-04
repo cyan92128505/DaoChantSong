@@ -45,8 +45,9 @@ class _ShowCasePageContent extends HookConsumerWidget {
     });
 
     useEffect(() {
-      Future.delayed(const Duration(milliseconds: 77)).then((value) => show());
-      return null;
+      return Future.delayed(const Duration(milliseconds: 77))
+          .then((value) => show())
+          .ignore;
     });
 
     return Scaffold(

@@ -57,3 +57,5 @@ app.*.map.json
 
 key/
 temp/
+
+*.diff

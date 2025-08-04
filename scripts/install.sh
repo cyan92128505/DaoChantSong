@@ -1,33 +1,39 @@
+
+# Clean existing lock file
+rm -rfv ./pubspec.lock
+
+# Install all required packages
+
 fvm flutter pub add  \
-audio_video_progress_bar \
-file_picker_pro \
-flutter_archive \
-flutter_file_downloader \
-flutter_hooks \
-flutter_markdown \
-flutter_slidable \
-flutter_svg \
-freezed_annotation \
-go_router_plus \
-hive \
-hive_flutter \
-hooks_riverpod \
-http \
-json_annotation \
-just_audio \
-just_audio_background \
-path_provider \
-riverpod_annotation \
-shared_preferences \
-share_plus \
-showcaseview \
-skeletonizer \
-url_launcher \
-youtube_explode_dart \
-dev:build_runner \
-dev:custom_lint \
-dev:freezed \
-dev:hive_generator \
-dev:json_serializable \
-dev:riverpod_generator \
-dev:riverpod_lint
+    audio_video_progress_bar \
+    file_picker_pro \
+    flutter_archive \
+    flutter_file_downloader \
+    flutter_hooks \
+    flutter_markdown \
+    flutter_slidable \
+    flutter_svg \
+    freezed_annotation \
+    go_router_plus \
+    hive \
+    hive_flutter \
+    hooks_riverpod \
+    http \
+    json_annotation \
+    just_audio \
+    just_audio_background \
+    path_provider \
+    riverpod_annotation \
+    shared_preferences \
+    share_plus \
+    showcaseview \
+    skeletonizer \
+    url_launcher \
+    youtube_explode_dart \
+    dev:build_runner \
+    dev:custom_lint \
+    dev:freezed \
+    dev:hive_generator \
+    dev:json_serializable \
+    dev:riverpod_generator \
+    dev:riverpod_lint

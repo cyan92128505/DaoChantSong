@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dao/assets/svg.dart';
 import 'package:dao/configs/theme.dart';
 import 'package:dao/hooks/use_screen_size.dart';
@@ -46,14 +48,17 @@ class _SplashScreen extends HookConsumerWidget {
     });
 
     useEffect(() {
-      Future.delayed(const Duration(milliseconds: 777)).then((_) {
+      final future =
+          Future.delayed(const Duration(microseconds: 777)).then((_) async {
         if (toggle.value) {
           return;
         }
 
         gotoNextScreen();
+
+        return;
       });
-      return null;
+      return future.ignore;
     }, []);
 
     return Scaffold(

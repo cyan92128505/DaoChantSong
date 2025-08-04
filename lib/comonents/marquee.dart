@@ -46,9 +46,10 @@ class MarqueeContainer extends HookConsumerWidget {
     final scrollController = useScrollController();
 
     useEffect(() {
-      animationController.forward();
-      shouldScroll.value = true;
-      return null;
+      return Future(() {
+        animationController.forward();
+        shouldScroll.value = true;
+      }).ignore;
     }, []);
 
     return SingleChildScrollView(

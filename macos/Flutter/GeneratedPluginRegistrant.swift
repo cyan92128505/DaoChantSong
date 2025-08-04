@@ -7,6 +7,7 @@ import Foundation
 
 import audio_service
 import audio_session
+import file_picker
 import file_picker_pro
 import file_selector_macos
 import flutter_archive
@@ -15,12 +16,13 @@ import open_share_plus
 import path_provider_foundation
 import share_plus
 import shared_preferences_foundation
-import sqflite
+import sqflite_darwin
 import url_launcher_macos
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   AudioServicePlugin.register(with: registry.registrar(forPlugin: "AudioServicePlugin"))
   AudioSessionPlugin.register(with: registry.registrar(forPlugin: "AudioSessionPlugin"))
+  FilePickerPlugin.register(with: registry.registrar(forPlugin: "FilePickerPlugin"))
   FilePickerProPlugin.register(with: registry.registrar(forPlugin: "FilePickerProPlugin"))
   FileSelectorPlugin.register(with: registry.registrar(forPlugin: "FileSelectorPlugin"))
   FlutterArchivePlugin.register(with: registry.registrar(forPlugin: "FlutterArchivePlugin"))

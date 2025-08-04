@@ -29,7 +29,7 @@ ThemeData defaultThemeData = ThemeData(
     backgroundColor: Colors.white,
     scrolledUnderElevation: 0,
   ),
-  cardTheme: const CardTheme(
+  cardTheme: const CardThemeData(
     color: Colors.white,
   ),
   canvasColor: Colors.transparent,
