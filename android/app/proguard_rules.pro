@@ -1,4 +1,4 @@
-# Flutter ProGuard Rules for DaoChantSong App
+# Flutter ProGuard Rules for DaoChant App
 # Add project specific ProGuard rules here.
 
 # Flutter specific rules
