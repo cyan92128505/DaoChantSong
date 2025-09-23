@@ -79,10 +79,8 @@ class SongTile extends HookConsumerWidget {
               return;
             }
 
-            await Share.shareXFiles(
-              [
-                XFile(songItem.filePath),
-              ],
+            await SharePlus.instance.share(
+              ShareParams(files: [XFile(songItem.filePath)]),
             );
           },
           child: Container(
