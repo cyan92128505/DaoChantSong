@@ -1,4 +1,4 @@
-import 'package:dao/comonents/show_system_panel.dart';
+import 'package:dao/components/show_system_panel.dart';
 import 'package:dao/models/route_config.dart';
 import 'package:dao/screens/copyright.dart';
 import 'package:dao/screens/onboarding.dart';

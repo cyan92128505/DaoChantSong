@@ -1,4 +1,4 @@
-import 'package:dao/comonents/remove_all_song_tile.dart';
+import 'package:dao/components/remove_all_song_tile.dart';
 import 'package:dao/models/remote_song.dart';
 import 'package:dao/providers/youtube_download.dart';
 import 'package:dao/screens/splash.dart';

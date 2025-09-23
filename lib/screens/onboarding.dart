@@ -1,4 +1,4 @@
-import 'package:dao/comonents/onboarding_page.dart';
+import 'package:dao/components/onboarding_page.dart';
 import 'package:dao/configs/theme.dart';
 import 'package:dao/models/route_config.dart';
 import 'package:flutter/material.dart';

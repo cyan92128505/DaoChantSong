@@ -1,6 +1,6 @@
-import 'package:dao/comonents/data_source_wrap.dart';
-import 'package:dao/comonents/empty_item.dart';
-import 'package:dao/comonents/song_tile.dart';
+import 'package:dao/components/data_source_wrap.dart';
+import 'package:dao/components/empty_item.dart';
+import 'package:dao/components/song_tile.dart';
 import 'package:dao/providers/player_view.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

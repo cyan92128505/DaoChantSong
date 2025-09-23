@@ -1,4 +1,4 @@
-import 'package:dao/comonents/copyright_page.dart';
+import 'package:dao/components/copyright_page.dart';
 import 'package:dao/models/route_config.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router_plus/go_router_plus.dart';

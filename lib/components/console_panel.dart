@@ -1,7 +1,7 @@
 import 'package:dao/assets/svg.dart';
-import 'package:dao/comonents/audio_progress_bar.dart';
-import 'package:dao/comonents/current_song_title.dart';
-import 'package:dao/comonents/data_source_wrap.dart';
+import 'package:dao/components/audio_progress_bar.dart';
+import 'package:dao/components/current_song_title.dart';
+import 'package:dao/components/data_source_wrap.dart';
 import 'package:dao/configs/theme.dart';
 import 'package:dao/providers/player_view.dart';
 import 'package:flutter/material.dart';

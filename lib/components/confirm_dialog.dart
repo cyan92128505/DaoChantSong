@@ -34,7 +34,7 @@ Future<bool> confirm(
         ),
         actions: <Widget>[
           actionCancel ??
-              ConfrimButton(
+              ConfirmButton(
                 result: false,
                 child: Text(
                   actionCancelText ??
@@ -45,7 +45,7 @@ Future<bool> confirm(
             width: 8,
           ),
           actionOK ??
-              ConfrimButton(
+              ConfirmButton(
                 result: true,
                 child: Text(
                   actionOKText ??
@@ -60,8 +60,8 @@ Future<bool> confirm(
   return isConfirm ?? false;
 }
 
-class ConfrimButton extends HookConsumerWidget {
-  const ConfrimButton({
+class ConfirmButton extends HookConsumerWidget {
+  const ConfirmButton({
     super.key,
     required this.child,
     required this.result,

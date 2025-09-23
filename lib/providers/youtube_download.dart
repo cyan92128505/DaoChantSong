@@ -33,7 +33,7 @@ class DownloadList extends _$DownloadList {
   }
 
   Future<void> download(String id) async {
-    ref.read(youtubeDonwloadProvider.notifier).download(id);
+    ref.read(youtubeDownloadProvider.notifier).download(id);
   }
 
   setupProcess(String id, double process) {
@@ -54,7 +54,7 @@ class DownloadList extends _$DownloadList {
 }
 
 @riverpod
-class YoutubeDonwload extends _$YoutubeDonwload {
+class YoutubeDownload extends _$YoutubeDownload {
   @override
   YoutubeExplode build() {
     return YoutubeExplode();

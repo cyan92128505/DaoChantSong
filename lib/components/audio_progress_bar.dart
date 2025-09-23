@@ -1,5 +1,5 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
-import 'package:dao/comonents/data_source_wrap.dart';
+import 'package:dao/components/data_source_wrap.dart';
 import 'package:dao/providers/player_view.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

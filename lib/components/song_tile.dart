@@ -1,5 +1,5 @@
 import 'package:dao/assets/svg.dart';
-import 'package:dao/comonents/confirm_dialog.dart';
+import 'package:dao/components/confirm_dialog.dart';
 import 'package:dao/configs/theme.dart';
 import 'package:dao/hooks/use_screen_size.dart';
 import 'package:dao/models/song.dart';

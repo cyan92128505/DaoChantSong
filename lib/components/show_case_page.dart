@@ -1,7 +1,7 @@
-import 'package:dao/comonents/add_song_buttons.dart';
-import 'package:dao/comonents/app_bar_icon.dart';
-import 'package:dao/comonents/console_panel.dart';
-import 'package:dao/comonents/play_list.dart';
+import 'package:dao/components/add_song_buttons.dart';
+import 'package:dao/components/app_bar_icon.dart';
+import 'package:dao/components/console_panel.dart';
+import 'package:dao/components/play_list.dart';
 import 'package:dao/providers/first_download.dart';
 import 'package:dao/providers/local_storage/first_open_app.dart';
 import 'package:dao/screens/player.dart';
