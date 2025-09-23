@@ -1,0 +1,78 @@
+name: Release Android APK
+on:
+  workflow_dispatch:
+
+jobs:
+  build_and_release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract application version
+        id: version
+        run: |
+          APP_VERSION=$(sed -n -e '/^version/ s/.*\: *//p' pubspec.yaml)
+          echo "APP_VERSION=v$APP_VERSION" >> $GITHUB_OUTPUT
+          echo "Building version: $APP_VERSION"
+
+      - name: Setup Java environment
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "temurin"
+
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.35.3"
+          channel: "stable"
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Generate code if needed
+        run: |
+          if [ -f "pubspec.yaml" ] && grep -q "build_runner" pubspec.yaml; then
+            flutter pub run build_runner build --delete-conflicting-outputs
+          fi
+
+      - name: Configure release signing
+        run: |
+          echo "Configuring release signing"
+          echo "${{ secrets.RELEASE_KEY_PROPERTIES }}" | base64 --decode > android/key.properties
+          echo "${{ secrets.RELEASE_KEYSTORE }}" | base64 --decode > android/key.jks
+
+      - name: Build release APK
+        run: flutter build apk --release
+
+      - name: Verify APK build
+        run: |
+          APK_FILE="build/app/outputs/flutter-apk/app-release.apk"
+          if [ -f "$APK_FILE" ]; then
+            echo "APK built successfully: $(du -h "$APK_FILE" | cut -f1)"
+          else
+            echo "APK build failed"
+            exit 1
+          fi
+
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: build/app/outputs/flutter-apk/app-release.apk
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: v${{ steps.version.outputs.APP_VERSION }}-${{ github.run_number }}
+          name: "Release v${{ steps.version.outputs.APP_VERSION }}"
+          body: |
+            ## Android APK Release
+
+            **Version**: v${{ steps.version.outputs.APP_VERSION }}
+            **Build**: #${{ github.run_number }}
+
+            Download the APK file to install on Android devices.
+          draft: false
+          prerelease: false
+          allowUpdates: true
